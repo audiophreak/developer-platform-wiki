@@ -1,18 +1,29 @@
 #!/usr/bin/env python3
-"""Validate local Markdown links and explicit Zensical navigation targets."""
+"""Validate the manual's structure: navigation targets, internal links and anchors, and Mermaid diagrams.
+
+Checks, all failing the run:
+
+- every `nav` entry in zensical.toml names an existing page, and every page is in `nav`;
+- every relative Markdown link resolves to an existing file, and its `#anchor` (if any) to a heading on that page;
+- every same-page `#anchor` link resolves;
+- after a build (`site/` present), the number of `class="mermaid"` placeholders equals the number of Mermaid blocks.
+"""
 
 from __future__ import annotations
 
 import re
 import sys
 import tomllib
+import unicodedata
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-LINK = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+)\)")
-MERMAID = re.compile(r"```mermaid\s*\n", re.IGNORECASE)
+LINK = re.compile(r"(?<!!)\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+HEADING = re.compile(r"^(#{1,6})\s+(.+?)\s*#*\s*$")
+FENCE = re.compile(r"^(```|~~~)")
+MERMAID = re.compile(r"^```mermaid\s*$", re.MULTILINE)
 
 
 def nav_files(items: list[object]) -> list[str]:
@@ -29,37 +40,93 @@ def nav_files(items: list[object]) -> list[str]:
     return paths
 
 
+def slugify(text: str) -> str:
+    """Python-Markdown's toc slugify: strip markup, NFKD to ASCII, drop punctuation, hyphenate whitespace."""
+    text = re.sub(r"`([^`]*)`", r"\1", text)
+    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
+    text = re.sub(r"<[^>]+>", "", text)
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    text = re.sub(r"[^\w\s-]", "", text).strip().lower()
+    return re.sub(r"[-\s]+", "-", text)
+
+
+def prose_lines(body: str) -> list[str]:
+    """Lines outside fenced code blocks."""
+    lines, fenced = [], False
+    for line in body.splitlines():
+        if FENCE.match(line.lstrip()):
+            fenced = not fenced
+            continue
+        if not fenced:
+            lines.append(line)
+    return lines
+
+
+def anchors_of(path: Path) -> set[str]:
+    found: set[str] = set()
+    counts: dict[str, int] = {}
+    for line in prose_lines(path.read_text()):
+        match = HEADING.match(line)
+        if not match:
+            continue
+        slug = slugify(match.group(2))
+        n = counts.get(slug, 0)
+        counts[slug] = n + 1
+        found.add(slug if n == 0 else f"{slug}_{n}")
+    return found
+
+
 def main() -> int:
     config = tomllib.loads((ROOT / "zensical.toml").read_text())
+    nav = nav_files(config["project"]["nav"])
     errors: list[str] = []
-    for rel in nav_files(config["project"]["nav"]):
+
+    for rel in nav:
         if not (DOCS / rel).is_file():
             errors.append(f"navigation target missing: docs/{rel}")
+    pages = sorted(p.relative_to(DOCS).as_posix() for p in DOCS.rglob("*.md"))
+    for rel in pages:
+        if rel not in nav:
+            errors.append(f"page not in navigation: docs/{rel}")
 
-    for source in DOCS.rglob("*.md"):
-        body = source.read_text()
-        for match in LINK.finditer(body):
-            raw = match.group(1).strip().split(maxsplit=1)[0].strip("<>")
+    anchor_cache: dict[Path, set[str]] = {}
+    links = 0
+    for source in sorted(DOCS.rglob("*.md")):
+        text = "\n".join(prose_lines(source.read_text()))
+        text = re.sub(r"`[^`\n]*`", "", text)  # inline code is not a link
+        for match in LINK.finditer(text):
+            raw = match.group(1).strip("<>")
             parts = urlsplit(raw)
-            if parts.scheme or parts.netloc or not parts.path:
+            if parts.scheme or parts.netloc:
                 continue
-            target = (source.parent / unquote(parts.path)).resolve()
+            links += 1
+            target = (source.parent / unquote(parts.path)).resolve() if parts.path else source
+            where = source.relative_to(ROOT)
             if not target.is_file():
-                errors.append(f"{source.relative_to(ROOT)}: local link target missing: {raw}")
+                errors.append(f"{where}: link target missing: {raw}")
+                continue
+            if parts.fragment:
+                anchors = anchor_cache.setdefault(target, anchors_of(target))
+                if parts.fragment not in anchors:
+                    errors.append(f"{where}: anchor not found: {raw}")
 
-    diagram_sources = sum(len(MERMAID.findall(p.read_text())) for p in DOCS.rglob("*.md"))
-    built_html = ROOT / "site"
-    rendered_slots = sum(p.read_text(errors="replace").count('class="mermaid"') for p in built_html.rglob("*.html")) if built_html.is_dir() else 0
-    if diagram_sources < 3:
-        errors.append(f"expected at least 3 Mermaid source blocks, found {diagram_sources}")
-    if built_html.is_dir() and rendered_slots != diagram_sources:
-        errors.append(f"Mermaid build mismatch: {diagram_sources} source blocks, {rendered_slots} rendered placeholders")
+    diagrams = sum(len(MERMAID.findall(p.read_text())) for p in DOCS.rglob("*.md"))
+    site = ROOT / "site"
+    placeholders = (
+        sum(p.read_text(errors="replace").count('class="mermaid"') for p in site.rglob("*.html"))
+        if site.is_dir()
+        else None
+    )
+    if placeholders is not None and placeholders != diagrams:
+        errors.append(f"Mermaid build mismatch: {diagrams} source blocks, {placeholders} rendered placeholders")
 
     if errors:
-        print("Broken local documentation links:")
-        print("\n".join(f"- {error}" for error in errors))
+        print("Documentation structure check FAILED:")
+        print("\n".join(f"- {e}" for e in errors))
         return 1
-    print(f"OK: {len(nav_files(config['project']['nav']))} navigation entries and local Markdown links resolve; {diagram_sources} Mermaid blocks are present in the build.")
+    built = f", {placeholders} placeholders in the build" if placeholders is not None else " (no build to compare)"
+    print(f"OK: {len(nav)} navigation entries, {len(pages)} pages, {links} internal links and anchors resolve; "
+          f"{diagrams} Mermaid diagrams{built}.")
     return 0
 
 

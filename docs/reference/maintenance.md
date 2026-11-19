@@ -1,36 +1,44 @@
-# Content maintenance workflow
+# Maintaining this manual
 
-Treat documentation changes like code: work on a focused branch, update Markdown, run local checks, review the diff, and use the private repository's pull-request process.
+## Layout
 
-## Add or change an article
-
-1. Choose a file under the matching `docs/` subject directory and use lowercase hyphenated names.
-2. Cover the purpose, problem solved, interactions, operation, failure modes, tradeoffs, and official references that fit the topic.
-3. Distinguish **Verified**, **General concept**, **Pending source verification**, and **Planned** claims. For implementation facts, record source tag and review date.
-4. Add or rename the path in `nav` inside `zensical.toml`. Sidebar sections are explicit there.
-5. Link related pages and add useful cross-links from existing pages.
-6. Write Mermaid as a fenced `mermaid` block. Preview the rendered diagram in Chrome.
-
-## Preview and validate
-
-```bash
-uv run zensical serve --open
-python3 scripts/check_links.py
-uv run zensical build --strict
+```text
+developer-platform-wiki/
+├── docs/                    # Markdown source; one folder per top-level section
+├── zensical.toml            # site, theme (dark slate default), explicit navigation, Markdown extensions
+├── pyproject.toml uv.lock   # zensical (dev group), exact via the lock
+├── scripts/check_links.py   # navigation targets, internal links + anchors, Mermaid block/placeholder parity
+├── scripts/check_content.py # no secrets, credentials, personal data or machine paths; baseline SHAs consistent
+└── .github/workflows/docs.yml   # strict build + both checks on push and PR; no deployment
 ```
 
-Inspect navigation, breadcrumbs, TOC, search, code rendering, Mermaid, dark mode, and mobile layout. A successful build validates site generation but does not guarantee every diagram is legible; inspect changed diagrams visually.
+## Local commands
 
-## Refresh implementation details after a platform release
+```bash
+uv sync --locked
+uv run zensical serve --open          # http://localhost:8000, live reload
+uv run zensical build --clean --strict
+uv run python scripts/check_links.py
+uv run python scripts/check_content.py
+```
 
-1. Read the platform and template release tags; record tag and commit SHA.
-2. Compare changelog, README, source, tests, generated output, and workflows.
-3. Separate features in merged/tagged releases from draft PR proposals.
-4. Update commands, versions, option tables, support ranges, and compatibility notes with source links.
-5. Search for old versions and feature names, run the link checker and strict build, and inspect the rendered pages.
+To browse a built copy without the dev server: `python3 -m http.server 8000 --bind 127.0.0.1 --directory site`. Diagrams need network access in the browser (Mermaid is loaded from `unpkg.com` by the theme).
 
-The wiki does not automatically synchronize with application source. A human must re-check the sources at each release.
+## Writing rules
 
-## Find stale documentation
+- **The released source is authoritative.** Verify every behavioural statement against a tag; prefer quoting real command output.
+- **Only released behaviour.** Nothing from an unmerged branch.
+- **Label uncertainty.** Troubleshooting entries carry an *Evidence* line; unverifiable facts go to the [source map](source-map.md).
+- **No secrets, identities or machine paths.** Use `~/Developer/...`, placeholders like `<your home>`, `me@example.test`. `scripts/check_content.py` enforces it.
+- **Mermaid:** quote labels containing `--`, `;`, `<` or brackets (`node["a --flag"]`); one idea per diagram; check rendering in the browser.
+- **Cross-link** related pages; every new page goes into `nav` in `zensical.toml`.
 
-Search pages labeled Pending source verification, old version strings, removed commands, outdated external links, and planned pages whose source milestone now exists. The future CI freshness check is backlog work, not an implemented feature.
+## Updating for a new baseline
+
+1. Read the three `CHANGELOG.md` files from the previous baseline's tags to the new ones.
+2. Update [Accepted baseline](../releases/index.md), [history](../releases/history.md), the home page banner, and `EXPECTED_SHAS` in `scripts/check_content.py`.
+3. Re-capture `devkit --help` output and re-run the live verification listed in the [source map](source-map.md#live-verification-performed).
+4. Re-check version tables (Tools, Release baseline) against `package.json.jinja`, `Package.swift` and `pyproject.toml`.
+5. Re-collect test counts (`pytest --collect-only -q`) at the new tags.
+6. Revisit the known-discrepancies table: remove fixed items, add new ones.
+7. Build, run both checks, verify in the browser, commit, push.

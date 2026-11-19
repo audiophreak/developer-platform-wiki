@@ -1,34 +1,58 @@
-# Developer Platform Knowledge Base
+# Developer Platform Manual
 
-Welcome to the technical field guide for building applications with the AI-assisted Developer Platform. This wiki connects the tools, workflows, and architecture behind reusable web application development, and gives you a practical path from a new workstation to a tested application.
+The owner, operator and developer manual for the **accepted Developer Platform baseline**: what each part does, why it exists, how the parts work together, and how to generate, build, test, upgrade, troubleshoot and recover applications with it.
 
-!!! warning "Implementation verification status"
-    The private repositories were inspected at Developer Platform `v0.2.0` and Web Core Template `v0.1.0`. See the [source map](reference/source-map.md) for tags, commit SHAs, and reviewed files. Draft pull requests are labeled separately and are not treated as released functionality.
+!!! success "Accepted baseline: 151 / 151 published acceptance gates passed"
 
-## Start here
+    | Repository | Release | Commit |
+    |---|---|---|
+    | `audiophreak/developer-platform` | `v0.8.0` | `e185d6d2c4ac9edde5db7963458c8146e4c229d2` |
+    | `audiophreak/web-core-template` | `v0.7.0` | `094e35b8b32d6186d609695f940afeb91a9b5990` |
+    | `audiophreak/native-ios-template` | `v0.1.0` | `cd346a01223f82e629649a71fc4d312e4e5c7746` |
 
-1. Read the [application development ecosystem](ecosystem/overview.md) to orient yourself to the tools and the boundaries between them.
-2. Review the [architecture overview](architecture/overview.md), which separates verified design intent from unknown implementation detail.
-3. Follow [Create your first application](getting-started/first-application.md) for a safe, inspectable Copier-based tutorial.
-4. Use [Working with Claude Code](workflows/claude-workflow.md) and [Git branches and pull requests](workflows/branches-prs.md) as daily workflow references.
+    Every statement in this manual was checked against these tags. See [Accepted baseline](releases/index.md) and the [source verification map](reference/source-map.md).
 
-## What this wiki covers
+## The platform in one picture
 
-The sidebar maps the full intended manual: getting started, ecosystem concepts, technology references, platform architecture, workflows, full-stack and iOS development, operations, learning labs, and reference material. Articles marked **Planned** are navigation anchors for future content rather than completed guides.
+```mermaid
+flowchart LR
+  you([You or an AI agent]) -->|devkit new / upgrade / status| devkit[developer-platform<br/>devkit CLI]
+  devkit -->|resolves a release tag,<br/>runs Copier| web[web-core-template<br/>v0.7.0]
+  devkit -->|second layer,<br/>native-ios profile| ios[native-ios-template<br/>v0.1.0]
+  web -->|renders everything except ios/| app[(Generated application<br/>repository)]
+  ios -->|renders only ios/| app
+  app --> next[Next.js app + REST API v1<br/>+ PostgreSQL + Better Auth]
+  app --> swift[SwiftUI app + generated<br/>Swift API client]
+  swift -->|Authorization: Bearer| next
+```
 
-## Learning objectives
+Three private repositories with independent version lines produce one application repository. `devkit` decides **which** template releases may be used; the templates decide **what** an application contains; the application owns everything after generation.
 
-By using the completed foundation, you should be able to explain how the Python-side provisioning tools differ from the Node-side application toolchain; trace how a template becomes a working project; make a scoped change with Claude Code; and understand what local checks and CI do before a pull request is accepted.
+## Where to start
 
-## Status vocabulary
+<div class="grid cards" markdown>
 
-| Label | Meaning |
+- **New to the platform?** Follow [Getting Started](getting-started/index.md) from prerequisites to a running native app.
+- **Need a command?** Use the [Command Reference](commands/index.md), organized by task.
+- **Want to understand the design?** Read [Platform Architecture](architecture/index.md), then [Web Application](web/index.md) and [Native iOS](ios/index.md).
+- **Something broke?** Go to [Troubleshooting](troubleshooting/index.md) or [Recovery procedures](upgrade/recovery.md).
+- **Working with Claude Code?** Read [AI-Assisted Development](ai-workflow/index.md).
+- **Upgrading a project?** Read [Upgrade and Recovery](upgrade/index.md) first.
+
+</div>
+
+## The manual's sections
+
+| Section | Answers |
 |---|---|
-| **Verified** | Checked against repository source or an authoritative source and dated. |
-| **General concept** | Established tool behavior explained without asserting that this platform uses every option. |
-| **Pending source verification** | The topic is in scope, but implementation details need comparison with a private source repository or released artifact. |
-| **Planned** | The article is a backlog placeholder, not operating guidance. |
-
-## Feedback and maintenance
-
-Keep article source in Git as Markdown. Follow the [content maintenance workflow](reference/maintenance.md) when adding pages or revising claims, and consult the [prioritized backlog](reference/backlog.md) to choose follow-up work. The site is static and locally previewable; it does not synchronize itself with application code.
+| [Getting Started](getting-started/index.md) | How do I set up a workstation and produce my first web, full-stack and native project? |
+| [Command Reference](commands/index.md) | What does each command do, when do I use it, and how does it fail? |
+| [Tools and Components](tools/index.md) | Why is each tool here, what calls it, what depends on it? |
+| [Platform Architecture](architecture/index.md) | How do `devkit`, the templates and generated projects divide responsibility? |
+| [Web Application](web/index.md) | How does the generated Next.js, PostgreSQL and Better Auth stack work? |
+| [Native iOS](ios/index.md) | How does the SwiftUI app authenticate, store its token and call the API? |
+| [Testing and CI](testing/index.md) | Which tests exist, where they run, and what the release gates prove. |
+| [Upgrade and Recovery](upgrade/index.md) | How do I upgrade safely and get back to a known state? |
+| [Troubleshooting](troubleshooting/index.md) | Symptoms, causes, diagnostics and safe recovery for real failures. |
+| [AI-Assisted Development](ai-workflow/index.md) | How agents are instructed, bounded and reviewed on this platform. |
+| [Releases](releases/index.md) | The accepted baseline and how it was reached. |
