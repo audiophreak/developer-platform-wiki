@@ -1,0 +1,178 @@
+PASS	preflight	docker reachable, no containers	
+PASS	preflight	no leftover docker volumes (stale volumes keep old passwords)	
+PASS	developer-platform	remote tag v0.8.0 -> expected commit (annotated)	peeled e185d6d2c4ac9edde5db7963458c8146e4c229d2
+PASS	developer-platform	remote main == expected SHA	e185d6d2c4ac9edde5db7963458c8146e4c229d2
+PASS	developer-platform	repository is PRIVATE	PRIVATE
+PASS	developer-platform	main CI green on the expected SHA	success	completed	e185d6d2c4ac9edde5db7963458c8146e4c229d2	https://github.com/audiophreak/developer-platform/actions/runs/44459902285
+PASS	web-core-template	remote tag v0.7.0 -> expected commit (annotated)	peeled 094e35b8b32d6186d609695f940afeb91a9b5990
+PASS	web-core-template	remote main == expected SHA	094e35b8b32d6186d609695f940afeb91a9b5990
+PASS	web-core-template	repository is PRIVATE	PRIVATE
+PASS	web-core-template	main CI green on the expected SHA	success	completed	094e35b8b32d6186d609695f940afeb91a9b5990	https://github.com/audiophreak/web-core-template/actions/runs/44453551740
+PASS	native-ios-template	remote tag v0.1.1 -> expected commit (annotated)	peeled f0f4a5a8ac58825e94a38068df1bdd413d2f1596
+PASS	native-ios-template	remote main == expected SHA	f0f4a5a8ac58825e94a38068df1bdd413d2f1596
+PASS	native-ios-template	repository is PRIVATE	PRIVATE
+PASS	native-ios-template	main CI green on the expected SHA	success	completed	f0f4a5a8ac58825e94a38068df1bdd413d2f1596	https://github.com/audiophreak/native-ios-template/actions/runs/44582608465
+PASS	platform	clone tag v0.8.0	exit 0
+PASS	platform	clone HEAD == expected SHA	e185d6d2c4ac9edde5db7963458c8146e4c229d2
+PASS	platform	uv sync --locked	exit 0
+PASS	platform	devkit --version	exit 0; 0.8.0
+PASS	platform	devkit doctor	exit 0
+PASS	basic-app	devkit new (published templates)	exit 0
+PASS	basic-app	web layer provenance = published v0.7.0 (not a path)	answers file
+PASS	basic-app	git baseline committed	
+PASS	fs-pg	devkit new (published templates)	exit 0
+PASS	fs-pg	web layer provenance = published v0.7.0 (not a path)	answers file
+PASS	fs-pg	git baseline committed	
+PASS	fs-sb	devkit new (published templates)	exit 0
+PASS	fs-sb	web layer provenance = published v0.7.0 (not a path)	answers file
+PASS	fs-sb	git baseline committed	
+PASS	nat-pg	devkit new (published templates)	exit 0
+PASS	nat-pg	web layer provenance = published v0.7.0 (not a path)	answers file
+PASS	nat-pg	native layer provenance = published v0.1.1	answers file
+PASS	nat-pg	git baseline committed	
+PASS	nat-sb	devkit new (published templates)	exit 0
+PASS	nat-sb	web layer provenance = published v0.7.0 (not a path)	answers file
+PASS	nat-sb	native layer provenance = published v0.1.1	answers file
+PASS	nat-sb	git baseline committed	
+PASS	platform	reject: full-stack without a database	exit 2
+PASS	platform	reject: full-stack without a database created nothing	
+PASS	platform	reject: full-stack with auth=false	exit 2
+PASS	platform	reject: full-stack with auth=false created nothing	
+PASS	platform	reject: native-ios without a database	exit 2
+PASS	platform	reject: native-ios without a database created nothing	
+PASS	platform	reject: native-set on web-core	exit 2
+PASS	platform	reject: native-set on web-core created nothing	
+PASS	basic-app	npm ci	exit 0
+PASS	basic-app	npm run check (lint+typecheck+format+tests+build)	exit 0; 3 tests passed in 1 run(s), none failed or skipped
+PASS	basic-app	npm audit --omit=dev	exit 0; found 0 vulnerabilities
+PASS	basic-app	no credentials in the project	grep exit 1
+PASS	basic-app	no personal paths or names in the project	grep exit 1 
+PASS	basic-app	upgrade dry-run: up to date	exit 0; up to date
+PASS	basic-app	tree clean after validation and dry-run upgrades	
+PASS	fs-pg	npm ci	exit 0
+PASS	fs-pg	npm run check (lint+typecheck+format+tests+build)	exit 0; 248 tests passed in 1 run(s), none failed or skipped
+PASS	fs-pg	npm audit --omit=dev	exit 0; found 0 vulnerabilities
+PASS	fs-pg	no credentials in the project	grep exit 1
+PASS	fs-pg	no personal paths or names in the project	grep exit 1 
+PASS	fs-pg	upgrade dry-run: up to date	exit 0; up to date
+PASS	fs-pg	tree clean after validation and dry-run upgrades	
+PASS	fs-sb	npm ci	exit 0
+PASS	fs-sb	npm run check (lint+typecheck+format+tests+build)	exit 0; 248 tests passed in 1 run(s), none failed or skipped
+PASS	fs-sb	npm audit --omit=dev	exit 0; found 0 vulnerabilities
+PASS	fs-sb	no credentials in the project	grep exit 1
+PASS	fs-sb	no personal paths or names in the project	grep exit 1 
+PASS	fs-sb	upgrade dry-run: up to date	exit 0; up to date
+PASS	fs-sb	tree clean after validation and dry-run upgrades	
+PASS	nat-pg	npm ci	exit 0
+PASS	nat-pg	npm run check (lint+typecheck+format+tests+build)	exit 0; 257 tests passed in 1 run(s), none failed or skipped
+PASS	nat-pg	npm audit --omit=dev	exit 0; found 0 vulnerabilities
+PASS	nat-pg	no credentials in the project	grep exit 1
+PASS	nat-pg	no personal paths or names in the project	grep exit 1 
+PASS	nat-pg	devkit status: both layers up to date	exit 0; 2 layers up to date
+PASS	nat-pg	upgrade without --layer is refused	exit 2
+PASS	nat-pg	upgrade --layer web dry-run	exit 0; up to date
+PASS	nat-pg	upgrade --layer native dry-run	exit 0; up to date
+PASS	nat-pg	tree clean after validation and dry-run upgrades	
+PASS	nat-sb	npm ci	exit 0
+PASS	nat-sb	npm run check (lint+typecheck+format+tests+build)	exit 0; 257 tests passed in 1 run(s), none failed or skipped
+PASS	nat-sb	npm audit --omit=dev	exit 0; found 0 vulnerabilities
+PASS	nat-sb	no credentials in the project	grep exit 1
+PASS	nat-sb	no personal paths or names in the project	grep exit 1 
+PASS	nat-sb	devkit status: both layers up to date	exit 0; 2 layers up to date
+PASS	nat-sb	upgrade without --layer is refused	exit 2
+PASS	nat-sb	upgrade --layer web dry-run	exit 0; up to date
+PASS	nat-sb	upgrade --layer native dry-run	exit 0; up to date
+PASS	nat-sb	tree clean after validation and dry-run upgrades	
+PASS	fs-pg	npm run db:init	exit 0
+PASS	fs-pg	npm run db:up	exit 0
+PASS	fs-pg	npm run db:migrate	exit 0
+PASS	fs-pg	npm run db:status (3 migrations applied, none pending)	exit 0; runtime role app_runtime; status printed
+PASS	fs-pg	npm run test:db (real database)	exit 0; 70 tests passed in 1 run(s), none failed or skipped
+PASS	fs-pg	npm run db:down	exit 0
+PASS	fs-sb	npm run db:init	exit 0
+PASS	fs-sb	npm run db:up	exit 0
+PASS	fs-sb	npm run db:migrate	exit 0
+PASS	fs-sb	npm run db:status (3 migrations applied, none pending)	exit 0; runtime role app_runtime; status printed
+PASS	fs-sb	npm run test:db (real database)	exit 0; 70 tests passed in 1 run(s), none failed or skipped
+PASS	fs-sb	npm run db:down	exit 0
+PASS	nat-pg	npm run db:init	exit 0
+PASS	nat-pg	npm run db:up	exit 0
+PASS	nat-pg	npm run db:migrate	exit 0
+PASS	nat-pg	npm run db:status (3 migrations applied, none pending)	exit 0; runtime role app_runtime; status printed
+PASS	nat-pg	npm run test:db (real database)	exit 0; 70 tests passed in 1 run(s), none failed or skipped
+PASS	nat-pg	npm run db:down	exit 0
+PASS	nat-sb	npm run db:init	exit 0
+PASS	nat-sb	npm run db:up	exit 0
+PASS	nat-sb	npm run db:migrate	exit 0
+PASS	nat-sb	npm run db:status (3 migrations applied, none pending)	exit 0; runtime role app_runtime; status printed
+PASS	nat-sb	npm run test:db (real database)	exit 0; 70 tests passed in 1 run(s), none failed or skipped
+PASS	nat-sb	npm run db:down	exit 0
+PASS	nat-pg	deterministic OpenAPI: npm run openapi:generate	exit 0
+PASS	nat-pg	OpenAPI unchanged by regeneration (byte-identical)	a42effbdb027d0c7
+PASS	nat-pg	web openapi.json == ios Contract/openapi.json	a42effbdb027d0c7
+PASS	nat-pg	static checks	exit 0
+PASS	nat-pg	contract check	exit 0
+PASS	nat-pg	Swift client regeneration, zero diff	exit 0
+PASS	nat-pg	host swift test (AppCore package)	exit 0; Swift Testing 58 passed (expected 58), no unexpected skips
+PASS	nat-pg	simulator package tests	exit 0; Swift Testing 58 passed (expected 58), no unexpected skips
+PASS	nat-pg	simulator hosted app + Keychain tests	exit 0; Swift Testing 11 passed (expected 11), no unexpected skips
+PASS	nat-pg	Release HTTPS / ATS configuration	exit 0
+PASS	nat-pg	committed client matches a fresh generation (git diff)	exit 0
+PASS	nat-pg	v0.1.1 fix: no Git-visible file after native gates incl. Release check	git status empty
+PASS	nat-pg	v0.1.1 fix: Release check log kept in the ignored build area	ios/.derived-data/release.log
+PASS	nat-pg	devkit status after the Release check	exit 0; 2 layers up to date
+PASS	nat-pg	upgrade --layer native dry-run after the Release check (not refused)	exit 0; up to date
+PASS	nat-pg	v0.1.1 fix: generated README documents devkit upgrade PROJECT --layer native, no upgrade-native	ios/README.md
+PASS	nat-sb	deterministic OpenAPI: npm run openapi:generate	exit 0
+PASS	nat-sb	OpenAPI unchanged by regeneration (byte-identical)	a42effbdb027d0c7
+PASS	nat-sb	web openapi.json == ios Contract/openapi.json	a42effbdb027d0c7
+PASS	nat-sb	static checks	exit 0
+PASS	nat-sb	contract check	exit 0
+PASS	nat-sb	Swift client regeneration, zero diff	exit 0
+PASS	nat-sb	host swift test (AppCore package)	exit 0; Swift Testing 58 passed (expected 58), no unexpected skips
+PASS	nat-sb	simulator package tests	exit 0; Swift Testing 58 passed (expected 58), no unexpected skips
+PASS	nat-sb	simulator hosted app + Keychain tests	exit 0; Swift Testing 11 passed (expected 11), no unexpected skips
+PASS	nat-sb	Release HTTPS / ATS configuration	exit 0
+PASS	nat-sb	committed client matches a fresh generation (git diff)	exit 0
+PASS	nat-sb	v0.1.1 fix: no Git-visible file after native gates incl. Release check	git status empty
+PASS	nat-sb	v0.1.1 fix: Release check log kept in the ignored build area	ios/.derived-data/release.log
+PASS	nat-sb	devkit status after the Release check	exit 0; 2 layers up to date
+PASS	nat-sb	upgrade --layer native dry-run after the Release check (not refused)	exit 0; up to date
+PASS	nat-sb	v0.1.1 fix: generated README documents devkit upgrade PROJECT --layer native, no upgrade-native	ios/README.md
+PASS	nat-up	devkit new with the published native v0.1.0	exit 0
+PASS	nat-up	native provenance = published v0.1.0	answers file
+PASS	nat-up	git baseline committed	
+PASS	nat-up	devkit status reports native v0.1.1 newer	exit 0; native  v0.1.0    newer available: v0.1.1
+PASS	nat-up	v0.1.0 Release check (reproduces the old defect)	exit 0
+PASS	nat-up	v0.1.0 defect reproduced: untracked ios/.derived-data-release.log	?? ios/.derived-data-release.log
+PASS	nat-up	devkit upgrade refuses the tree dirtied by the v0.1.0 check	exit 1
+PASS	nat-up	upgrade --layer native dry-run plans v0.1.0 -> v0.1.1	exit 0; Upgrading v0.1.0 -> v0.1.1
+PASS	nat-up	upgrade --layer native to v0.1.1	exit 0
+PASS	nat-up	native provenance after upgrade = v0.1.1	answers file
+PASS	nat-up	upgrade changed exactly the answers file, README and Release check	.copier-answers.ios.yml, ios/README.md, ios/scripts/check-release-config.sh
+PASS	nat-up	upgrade committed	
+PASS	nat-up	devkit status: both layers up to date	exit 0; 2 layers up to date
+PASS	nat-up	v0.1.1 Release check on the upgraded project	exit 0
+PASS	nat-up	upgraded project stays clean after the Release check	git status empty
+PASS	nat-up	upgrade --layer native dry-run not refused afterwards	exit 0; up to date
+PASS	nat-pg	e2e.mjs exit status	exit 0
+PASS	nat-pg	e2e: sign-in + Keychain token + session + create/read/update + cross-user denial (phase one)	marker found
+PASS	nat-pg	e2e: server and database restart	marker found
+PASS	nat-pg	e2e: relaunch persistence + delete + sign-out + old-token 401 (phase two)	marker found
+PASS	nat-pg	e2e: no token in the server log	marker found
+PASS	nat-pg	e2e: scenario verdict	marker found
+PASS	nat-pg	e2e: no test skipped (phase tests ran)	
+PASS	nat-sb	e2e.mjs exit status	exit 0
+PASS	nat-sb	e2e: sign-in + Keychain token + session + create/read/update + cross-user denial (phase one)	marker found
+PASS	nat-sb	e2e: server and database restart	marker found
+PASS	nat-sb	e2e: relaunch persistence + delete + sign-out + old-token 401 (phase two)	marker found
+PASS	nat-sb	e2e: no token in the server log	marker found
+PASS	nat-sb	e2e: scenario verdict	marker found
+PASS	nat-sb	e2e: no test skipped (phase tests ran)	
+PASS	parity	openapi.json identical across nat-pg / nat-sb / fs-pg / fs-sb	native pair
+PASS	parity	ios/ tree identical between providers (apart from the app name / bundle id)	all non-build files, name normalised
+PASS	parity	both providers passed the same e2e scenario	
+PASS	developer-platform	local repo HEAD, status, tags and branches unchanged	HEAD e185d6d2c4ac
+PASS	web-core-template	local repo HEAD, status, tags and branches unchanged	HEAD 094e35b8b32d
+PASS	native-ios-template	local repo HEAD, status, tags and branches unchanged	HEAD f0f4a5a8ac58
+TOTAL gates 177 passed 177 failed 0

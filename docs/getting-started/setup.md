@@ -33,9 +33,9 @@ The repositories' docs and tests assume the checkouts are siblings:
 mkdir -p ~/Developer && cd ~/Developer
 gh repo clone audiophreak/developer-platform
 cd developer-platform
-git checkout v0.8.0            # optional: pin exactly the accepted release
+git checkout v0.8.1            # optional: pin exactly the accepted release
 uv sync --locked               # .venv from uv.lock: copier 9.19.1, pytest 9.2.0, devkit itself
-uv run devkit --version        # devkit 0.8.0
+uv run devkit --version        # devkit 0.8.1
 uv run devkit doctor
 ```
 

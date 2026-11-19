@@ -1,0 +1,57 @@
+# The single definition of the accepted baseline this manual documents.
+#
+# scripts/check_baseline.py requires every high-authority "current baseline" location (site footer, README and home
+# tables, release and source-map tables, generated-project examples) to agree with [current]. scripts/check_content.py
+# allows a full SHA in the manual only if it is listed here (current or history) or is an allowed action pin.
+# Historical pages may name any release in [[history]]; old versions are not banned globally.
+#
+# To move the baseline: verify the new tags on GitHub, move the old [current] entry into [[history]], update [current],
+# then run the checks; they list every location that still names the previous release.
+
+[current.platform]
+repository = "developer-platform"
+version = "v0.8.1"
+commit = "fc464344099bb96b1a58a590c4460e4ead9b1b51"
+tag_object = "8a72aabe194864de03c44a9d8cad0cd0b6ebe058"
+
+[current.web]
+repository = "web-core-template"
+version = "v0.7.1"
+commit = "f704572c35147597a24c2b1eb9b99dae332ea05b"
+tag_object = "547e81958cd5c63e5f58304d91a13bb00e25fa21"
+
+[current.native]
+repository = "native-ios-template"
+version = "v0.1.1"
+commit = "f0f4a5a8ac58825e94a38068df1bdd413d2f1596"
+tag_object = "8591c9cd48b829563c74b4cdccec1ce14082e2d5"
+
+[[history]]
+repository = "developer-platform"
+version = "v0.8.0"
+commit = "e185d6d2c4ac9edde5db7963458c8146e4c229d2"
+tag_object = "13d9dd6b81954fcd4439f8147630449deb983f50"
+
+[[history]]
+repository = "web-core-template"
+version = "v0.7.0"
+commit = "094e35b8b32d6186d609695f940afeb91a9b5990"
+tag_object = "90e09368844de6c1f81f3d87547980bcbf442289"
+
+[[history]]
+repository = "native-ios-template"
+version = "v0.1.0"
+commit = "cd346a01223f82e629649a71fc4d312e4e5c7746"
+tag_object = "97a3a7ce531b93e01507a8d88da0f88de79d2372"
+
+# Commits that are not releases but are documented as provenance (CI negative-control probes, never merged; reachable on
+# GitHub through each repository's closed pull request #3).
+[[provenance]]
+repository = "developer-platform"
+commit = "8a3b8d1333c389b857c24dea03729589ce62c438"
+purpose = "CI evidence negative control (deliberate failing and skipped test), PR #3, run 44118456812"
+
+[[provenance]]
+repository = "web-core-template"
+commit = "e451b938fa2f5e2a9e6f059101c5f22942a34eda"
+purpose = "CI evidence negative control (deliberate failing and skipped test), PR #3, run 44118473632"

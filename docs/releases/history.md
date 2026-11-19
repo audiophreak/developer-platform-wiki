@@ -17,6 +17,7 @@ timeline
     Native iOS : template v0.7.0 (native_client) : native-ios-template v0.1.0 : devkit v0.8.0
     Acceptance : 151 / 151 gates (native v0.1.0)
     Native patch : native-ios-template v0.1.1 : 177 / 177 gates
+    Documentation closeout : devkit v0.8.1 : web-core-template v0.7.1 : 192 / 192 gates
 ```
 
 ## Milestones
@@ -33,6 +34,7 @@ timeline
 | 7 | template **v0.7.0** (`094e35b`), native-ios-template **v0.1.0** (`cd346a0`), devkit **v0.8.0** (`e185d6d`) | `native_client` (bearer, OpenAPI 3.1); the SwiftUI app; `full-stack` and `native-ios` profiles; `devkit status`, `native add`, `upgrade --layer` | **template layering** in one directory (prototyped and adopted); `NATIVE_REQUIRES_WEB` pair rule; **staged, atomic two-layer generation** with `.devkit-partial`; generated Swift client with zero-diff regeneration in CI; hosted Keychain tests; local native e2e gate |
 | 8 | – | **published-pair acceptance: 151 / 151** (native v0.1.0, the original accepted baseline) | fail-closed audit; preflight against stale Docker volumes |
 | 9 | native-ios-template **v0.1.1** (`f0f4a5a`) | corrective patch: the generated `ios/README.md` documents `devkit upgrade PROJECT --layer native` (v0.1.0 named a non-existent subcommand); `check-release-config.sh` keeps its log in the ignored `ios/.derived-data/` (v0.1.0 left an un-ignored `ios/.derived-data-release.log` that made the next upgrade refuse) | no architecture, contract, client, dependency or behaviour change; devkit v0.8.0 unchanged (native range `>=0.1.0,<0.2.0`); regression tests for documented devkit commands and for a clean tree after the Release check; **published acceptance 177 / 177**, including a real v0.1.0 → v0.1.1 layer upgrade |
+| 10 | devkit **v0.8.1** (`fc46434`), web-core-template **v0.7.1** (`f704572`) | documentation closeout after an independent read-only audit: the platform README names three repositories, `usage.md` the 0.8.x ranges and two-layer rules, `ci-evidence.md` the 28 integration tests and the CI probe; the template README describes the real test suite; acceptance evidence archived in this wiki; the wiki's current baseline is defined once (`baseline.toml`) and checked in CI | **documentation-only**: no code, template, generated-output, contract or compatibility change (42 configurations byte-identical; CLI help and registry identical); **published acceptance 192 / 192** |
 
 ## Decisions that shaped the platform
 

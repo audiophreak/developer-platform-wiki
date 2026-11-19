@@ -18,7 +18,7 @@ web-core-template/
 └── docs/               # features.md, maintaining.md, upgrading.md, provenance.md, ci-evidence.md
 ```
 
-### Questions at v0.7.0
+### Questions at v0.7.x
 
 | Question | Type | Default | Rule (validator) |
 |---|---|---|---|

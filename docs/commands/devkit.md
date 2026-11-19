@@ -4,7 +4,7 @@
 
 ```bash
 cd ~/Developer/developer-platform
-uv run devkit --version          # devkit 0.8.0
+uv run devkit --version          # devkit 0.8.1
 uv run devkit COMMAND --help
 ```
 
@@ -110,7 +110,7 @@ uv run devkit status PROJECT
 ```
 
 ```text
-web     v0.7.0    up to date
+web     v0.7.1    up to date
 native  v0.1.1    up to date
 ```
 

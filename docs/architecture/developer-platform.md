@@ -5,7 +5,7 @@
 ```text
 developer-platform/
 ├── Brewfile                  # checked by doctor, installed by you
-├── pyproject.toml uv.lock    # devkit 0.8.0, copier==9.19.1, pytest==9.2.0 (dev), exclude-newer
+├── pyproject.toml uv.lock    # devkit 0.8.1, copier==9.19.1, pytest==9.2.0 (dev), exclude-newer
 ├── src/devkit/
 │   ├── cli.py                # argparse: doctor, new, upgrade, status, native add; exit codes
 │   ├── doctor.py             # read-only checks

@@ -25,7 +25,7 @@
 uv run copier copy --vcs-ref HEAD --defaults --data app_name=scratch-app . ../scratch-app
 
 # from the published origin at an explicit release
-uv run copier copy --vcs-ref v0.7.0 --defaults \
+uv run copier copy --vcs-ref v0.7.1 --defaults \
   --data app_name=my-app --data zod=true \
   https://github.com/audiophreak/web-core-template.git ../my-app
 
@@ -50,8 +50,8 @@ uv run copier copy --vcs-ref v0.1.1 --data app_name=my-app \
 
 ```bash
 git status                                         # must be clean
-uv run copier update --vcs-ref v0.7.0 --defaults --skip-answered
-uv run copier update --vcs-ref v0.7.0 --defaults --skip-answered --data rest_api=true   # enable a feature
+uv run copier update --vcs-ref v0.7.1 --defaults --skip-answered
+uv run copier update --vcs-ref v0.7.1 --defaults --skip-answered --data rest_api=true   # enable a feature
 uv run copier update --answers-file .copier-answers.ios.yml --vcs-ref v0.1.1 --defaults --skip-answered  # native layer
 ```
 
@@ -69,7 +69,7 @@ uv run copier update --answers-file .copier-answers.ios.yml --vcs-ref v0.1.1 --d
 ## The answers file
 
 ```yaml
-_commit: v0.7.0                                              # the release rendered
+_commit: v0.7.1                                              # the release rendered
 _src_path: https://github.com/audiophreak/web-core-template.git  # where it came from
 app_name: my-app
 zod: true

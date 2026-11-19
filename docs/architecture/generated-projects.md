@@ -38,7 +38,7 @@ flowchart LR
 ## Provenance
 
 ```yaml title=".copier-answers.yml (native-ios profile)"
-_commit: v0.7.0
+_commit: v0.7.1
 _src_path: https://github.com/audiophreak/web-core-template.git
 app_description: A Next.js application
 app_name: nat-app

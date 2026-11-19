@@ -2,22 +2,22 @@
 
 The owner, operator and developer manual for the **accepted Developer Platform baseline**: what each part does, why it exists, how the parts work together, and how to generate, build, test, upgrade, troubleshoot and recover applications with it.
 
-!!! success "Accepted baseline: native v0.1.1 patch accepted, 177 / 177 published acceptance gates passed"
+!!! success "Accepted baseline: 192 / 192 published acceptance gates passed"
 
     | Repository | Release | Commit |
     |---|---|---|
-    | `audiophreak/developer-platform` | `v0.8.0` | `e185d6d2c4ac9edde5db7963458c8146e4c229d2` |
-    | `audiophreak/web-core-template` | `v0.7.0` | `094e35b8b32d6186d609695f940afeb91a9b5990` |
+    | `audiophreak/developer-platform` | `v0.8.1` | `fc464344099bb96b1a58a590c4460e4ead9b1b51` |
+    | `audiophreak/web-core-template` | `v0.7.1` | `f704572c35147597a24c2b1eb9b99dae332ea05b` |
     | `audiophreak/native-ios-template` | `v0.1.1` | `f0f4a5a8ac58825e94a38068df1bdd413d2f1596` |
 
-    The original baseline (native `v0.1.0`, 151 / 151 gates) is preserved in the [release history](releases/history.md). Every statement in this manual was checked against these tags. See [Accepted baseline](releases/index.md) and the [source verification map](reference/source-map.md).
+    devkit v0.8.1 and web v0.7.1 are documentation-only releases over the original baseline (devkit v0.8.0, web v0.7.0, native v0.1.0, 151 / 151 gates), followed by the native v0.1.1 corrective patch (177 / 177); see the [release history](releases/history.md) and the archived [acceptance evidence](reference/acceptance-evidence.md). Every statement in this manual was checked against these tags. See [Accepted baseline](releases/index.md) and the [source verification map](reference/source-map.md).
 
 ## The platform in one picture
 
 ```mermaid
 flowchart LR
   you([You or an AI agent]) -->|devkit new / upgrade / status| devkit[developer-platform<br/>devkit CLI]
-  devkit -->|resolves a release tag,<br/>runs Copier| web[web-core-template<br/>v0.7.0]
+  devkit -->|resolves a release tag,<br/>runs Copier| web[web-core-template<br/>v0.7.1]
   devkit -->|second layer,<br/>native-ios profile| ios[native-ios-template<br/>v0.1.1]
   web -->|renders everything except ios/| app[(Generated application<br/>repository)]
   ios -->|renders only ios/| app

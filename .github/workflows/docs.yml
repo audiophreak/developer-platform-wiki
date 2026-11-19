@@ -11,7 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -19,8 +19,29 @@ jobs:
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
       - run: python -m pip install uv==0.13.6
       - run: uv sync --locked
-      - run: uv run zensical build --clean --strict
-      - run: uv run python scripts/check_links.py
-      - run: uv run python scripts/check_content.py
+      - name: Strict build (fails on any warning, including a missing anchor)
+        run: uv run zensical build --clean --strict
+      - name: Navigation, internal links and anchors, Mermaid placeholders
+        run: uv run python scripts/check_links.py
+      - name: Secrets, personal data, machine paths, SHAs and placeholders
+        run: uv run python scripts/check_content.py
+      - name: Current baseline (baseline.toml) in every high-authority location
+        run: uv run python scripts/check_baseline.py
+      - name: devkit command syntax in examples
+        run: uv run python scripts/check_commands.py
+      - name: Mermaid diagrams render in a real browser
+        shell: bash
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/http.log" 2>&1 &
+          google-chrome --headless=new --no-sandbox --no-first-run --remote-debugging-port=9333 \
+            --user-data-dir="$RUNNER_TEMP/chrome" about:blank > "$RUNNER_TEMP/chrome.log" 2>&1 &
+          for _ in $(seq 1 60); do
+            if curl -sf http://127.0.0.1:9333/json/version > /dev/null && curl -sf -o /dev/null http://127.0.0.1:8765/; then break; fi
+            sleep 1
+          done
+          node scripts/check_mermaid.mjs http://127.0.0.1:8765 9333

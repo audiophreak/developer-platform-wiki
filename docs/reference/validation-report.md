@@ -2,7 +2,21 @@
 
 Validation of this manual before publication, 2026-11-19, and its revalidation for the native v0.1.1 baseline update.
 
-## Revalidation: native-ios-template v0.1.1 (current baseline)
+## Revalidation: documentation closeout (current baseline)
+
+devkit v0.8.1, web v0.7.1, native v0.1.1.
+
+| Check | Result |
+|---|---|
+| Strict build | no issues (it caught two anchors to sections not yet written during the update) |
+| Links and anchors | 69 pages in navigation; 170 links and anchors resolve |
+| Content and security | 87 files clean, including every archived evidence file and `SHA256SUMS`; SHAs read from `baseline.toml`; unfilled `*_RESULT` placeholders rejected |
+| Current baseline (`check_baseline.py`, new) | 48 references agree with `baseline.toml`; a negative control restoring the stale footer (native v0.1.0) fails it |
+| devkit command syntax (`check_commands.py`, new) | every devkit command in code is valid for devkit 0.8.x; its self-test rejects four invalid commands |
+| Mermaid (`check_mermaid.mjs`, now in CI) | 22 / 22 diagrams render; per-page counts come from the Markdown |
+| Evidence integrity | `shasum -a 256 -c` passes for every archived file |
+
+## Revalidation: native-ios-template v0.1.1
 
 | Check | Result |
 |---|---|

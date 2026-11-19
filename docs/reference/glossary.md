@@ -31,7 +31,7 @@ local mode
 :   `devkit new --template PATH`: renders a template checkout as it is on disk, for template development; records a home-relative path.
 
 lock matrix
-:   The set of committed lockfiles in `web-core-template/locks/`, one per distinct npm dependency set (11 at v0.7.0), selected by the computed `lock_key`.
+:   The set of committed lockfiles in `web-core-template/locks/`, one per distinct npm dependency set (11 at v0.7.x), selected by the computed `lock_key`.
 
 `NATIVE_REQUIRES_WEB`
 :   The registry table of which web releases each native release works with (native 0.1.x ↔ web `>=0.7.0,<0.8.0`).

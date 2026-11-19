@@ -1,6 +1,6 @@
 # Web application toolchain
 
-All versions are exact pins in `web-core-template/template/package.json.jinja` at `v0.7.0`, each at least two weeks old when chosen.
+All versions are exact pins in `web-core-template/template/package.json.jinja` at `v0.7.0`, unchanged in `v0.7.1`, each at least two weeks old when chosen.
 
 ## Node.js, fnm and npm
 

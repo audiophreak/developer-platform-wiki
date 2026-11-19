@@ -4,13 +4,13 @@
 
 ```mermaid
 flowchart TB
-  subgraph DP ["developer-platform  (v0.8.0)"]
+  subgraph DP ["developer-platform  (v0.8.1)"]
     cli[devkit CLI<br/>doctor · new · status · upgrade · native add]
     reg[Profile registry<br/>profiles.py]
     snaps[Contract snapshots<br/>tests/contracts/]
     brew[Brewfile]
   end
-  subgraph WT ["web-core-template  (v0.7.0)"]
+  subgraph WT ["web-core-template  (v0.7.1)"]
     wq[copier.yml<br/>questions + validators]
     wf[template/<br/>Next.js app files]
     wl[locks/<br/>11 lockfiles]

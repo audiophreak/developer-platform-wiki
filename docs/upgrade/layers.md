@@ -9,7 +9,7 @@ uv run devkit status PROJECT
 ```
 
 ```text
-web     v0.7.0    up to date
+web     v0.7.1    up to date
 native  v0.1.1    up to date
 ```
 
@@ -86,7 +86,7 @@ If the contract changed, `sh ios/scripts/sync-contract.sh`, fix and test the app
 
 ## Upgrading a v0.1.0 native layer to v0.1.1
 
-Verified in the published acceptance (devkit v0.8.0 unchanged):
+Verified in the published acceptance (devkit v0.8.0 at the time; v0.8.1 behaves identically):
 
 ```bash
 devkit status PROJECT                          # native  v0.1.0    newer available: v0.1.1

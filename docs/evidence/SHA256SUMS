@@ -1,0 +1,14 @@
+# SHA-256 of every archived file (path relative to docs/evidence/), then of each ORIGINAL harness whose archived copy is sanitized.
+# archived
+2efe5996c9ee2e9d3465d14d1efdde16153772d6bf2f6534a13cb02f9d8d1cd6  2026-11-19-closeout-v0.8.1/audit-closeout-v0.8.1.sanitized.py
+e7247536614438426be7c4db0c7ceed3b1d0c0a4eecd22a5faa938a966d89f04  2026-11-19-closeout-v0.8.1/closeout-v0.8.1-audit-ACCEPTED.tsv
+bd7e7f350cb0873b1e9009fda833015176aa5ee1d1dcd9e5da057946f90fc7a6  2026-11-19-native-v0.1.1/audit-native-v0.1.1.sanitized.py
+fda2ca3310d68f09092e1376a5990294a6d0bc5c2dd30fa3c219465d9050e598  2026-11-19-native-v0.1.1/native-v0.1.1-audit-ACCEPTED.tsv
+a01a0a885c36c37a262ce9cdd2f6ded40459c9a28589795daf093367392a602a  2026-11-19-original-baseline/audit-wp4.sanitized.py
+098e1456595dd216c4e8322a5d7f7fade5a6a99dd9d485bbfd8f344f1f50a97b  2026-11-19-original-baseline/run1-wp4-audit.tsv
+935a2fe44a134073ed065f74b9af7f6f15c3eae53ab2901dc2ff86e0ca557901  2026-11-19-original-baseline/run2-wp4-audit.tsv
+10603edb618d7896b5cfde2b129b6965fbf845b3a01977e33acf0d76e6d350b3  2026-11-19-original-baseline/run3-wp4-audit-ACCEPTED.tsv
+# originals (executed from the owner's ~/Claude directory; not archived verbatim because they contain the owner's surname)
+6f448b150712778b88efc6d69d36802b049a4af1874d0983a5a760007fddaeff  original:audit-wp4.py
+447c227be936c939349d426f6f634bcc67c5cc12de75afbc70a0370a67ada0cd  original:audit-native-v0.1.1.py
+73b7797123b29b2bc94b1f12c3f74b40acc8c056747c9ba201ef80f24bbe4aa2  original:audit-closeout-v0.8.1.py

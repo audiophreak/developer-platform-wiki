@@ -11,12 +11,12 @@ uv run devkit new my-app --description "What it does" --output-dir .. --dry-run
 ```
 
 ```text
-[dry run] Profile 'web-core', published template https://github.com/audiophreak/web-core-template.git @ v0.7.0
+[dry run] Profile 'web-core', published template https://github.com/audiophreak/web-core-template.git @ v0.7.1
 ...
 Dry run complete. Nothing was written. Would create: <your home>/Developer/my-app
 ```
 
-`devkit` resolved the **newest release tag this devkit supports** (`>=0.1.0,<0.8.0`, so `v0.7.0`) and Copier listed every file it would create. Nothing was written.
+`devkit` resolved the **newest release tag this devkit supports** (`>=0.1.0,<0.8.0`, so `v0.7.1`) and Copier listed every file it would create. Nothing was written.
 
 ## 2. Generate
 
@@ -78,7 +78,7 @@ Look at the answers file:
 
 ```yaml title=".copier-answers.yml"
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_commit: v0.7.0
+_commit: v0.7.1
 _src_path: https://github.com/audiophreak/web-core-template.git
 app_description: What it does
 app_name: my-app

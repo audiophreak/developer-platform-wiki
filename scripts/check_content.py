@@ -13,26 +13,23 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCANNED = [ROOT / "docs", ROOT / "scripts", ROOT / "README.md", ROOT / "zensical.toml", ROOT / "pyproject.toml",
-           ROOT / ".github"]
+           ROOT / "baseline.toml", ROOT / ".github"]
 
-# The accepted baseline: every full 40-hex SHA that names one of these releases must be the right one.
-EXPECTED_SHAS = {
-    "developer-platform": "e185d6d2c4ac9edde5db7963458c8146e4c229d2",
-    "web-core-template": "094e35b8b32d6186d609695f940afeb91a9b5990",
-    "native-ios-template": "f0f4a5a8ac58825e94a38068df1bdd413d2f1596",  # v0.1.1
-}
-# Other full SHAs that may legitimately appear (annotated tag objects, pinned actions, a contract checksum prefix).
-ALLOWED_SHAS = {
-    "13d9dd6b81954fcd4439f8147630449deb983f50",  # tag object developer-platform v0.8.0
-    "90e09368844de6c1f81f3d87547980bcbf442289",  # tag object web-core-template v0.7.0
-    "97a3a7ce531b93e01507a8d88da0f88de79d2372",  # tag object native-ios-template v0.1.0 (original accepted release)
-    "cd346a01223f82e629649a71fc4d312e4e5c7746",  # commit native-ios-template v0.1.0 (release history)
-    "8591c9cd48b829563c74b4cdccec1ce14082e2d5",  # tag object native-ios-template v0.1.1
+# baseline.toml is the source of truth: the current release of each repository, and every earlier release the manual
+# documents as history. Every full 40-hex SHA in the manual must be one of those, or an allowed action pin.
+import tomllib
+
+_BASELINE = tomllib.loads((ROOT / "baseline.toml").read_text())
+EXPECTED_SHAS = {entry["repository"]: entry["commit"] for entry in _BASELINE["current"].values()}
+ALLOWED_SHAS = {sha for entry in [*_BASELINE["current"].values(), *_BASELINE["history"], *_BASELINE.get("provenance", [])]
+                for sha in (entry["commit"], entry.get("tag_object", "")) if sha} | {
     "3d3c42e5aac5ba805825da76410c181273ba90b1",  # actions/checkout v7.0.1
     "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",  # actions/setup-python v7.1.0
+    "949feb2413d6458794dcd2491c4babbbce0c15c1",  # actions/setup-node v7.1.0
 }
 
 FORBIDDEN = [
+    ("unfilled placeholder", re.compile(r"\b[A-Z]+_RESULT\b")),
     ("GitHub token", re.compile(r"gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}")),
     ("private key", re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----")),
     ("AWS key id", re.compile(r"AKIA[0-9A-Z]{16}")),
@@ -54,7 +51,7 @@ def files() -> list[Path]:
         if entry.is_file():
             found.append(entry)
         elif entry.is_dir():
-            found.extend(p for p in entry.rglob("*") if p.is_file() and p.suffix in {".md", ".py", ".toml", ".yml", ".yaml"})
+            found.extend(p for p in entry.rglob("*") if p.is_file() and (p.suffix in {".md", ".py", ".toml", ".yml", ".yaml", ".tsv", ".txt"} or p.name == "SHA256SUMS"))
     return sorted(found)
 
 

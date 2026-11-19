@@ -16,7 +16,7 @@
 | Generated project `npm run check` | ✓ | | |
 | Generated project `npm run test:db` | ✓ (`postgres:17.10` service) | | |
 | Byte identity (`compare_release.py`), lock refresh check | (partly, via tests) | ✓ before tagging | release-time decisions |
-| Published-pair acceptance (177 gates at native v0.1.1) | | ✓ | must use the **published** tags end to end, on a real workstation |
+| Published-pair acceptance (192 gates at the current baseline) | | ✓ | must use the **published** tags end to end, on a real workstation |
 
 ## Workflow conventions
 

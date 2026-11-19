@@ -2,7 +2,7 @@
 
 `rest_api` (template 0.4.0+) adds a versioned JSON API under `/api/v1`, implemented as Next.js route handlers, with shared Zod contracts and RFC 9457 errors. It adds **no npm dependency**.
 
-## Endpoints at v0.7.0
+## Endpoints at v0.7.x
 
 | Method | Path | Auth | Success | Errors |
 |---|---|---|---|---|

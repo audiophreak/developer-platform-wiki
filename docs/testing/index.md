@@ -34,7 +34,7 @@ flowchart LR
   end
   subgraph A [Published-pair acceptance]
     a1[fresh clone at tags<br/>generate from GitHub<br/>every profile × provider]
-    a2[fail-closed gates<br/>177 / 177 passed]
+    a2[fail-closed gates<br/>192 / 192 passed]
   end
   L --> C --> R --> T --> A
   A -. a failure means fix forward,<br/>new patch release .-> L
@@ -61,4 +61,4 @@ Counts for the generated projects are from the published acceptance run; reposit
 - [Web and generated-project tests](web.md): unit, generated-project, PostgreSQL, Supabase, auth/authorization, OpenAPI drift.
 - [Native tests](native.md): host, simulator package, hosted Keychain, native e2e.
 - [GitHub CI versus local](ci.md): what runs where and why.
-- [Release gates and acceptance](release-gates.md): the live gate, byte identity, and the published-pair acceptance (151 gates for v0.1.0, 177 for v0.1.1).
+- [Release gates and acceptance](release-gates.md): the live gate, byte identity, and the published-pair acceptance (151 gates for the original baseline, 177 for native v0.1.1, 192 for the documentation closeout).

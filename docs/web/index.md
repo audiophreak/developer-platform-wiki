@@ -1,6 +1,6 @@
 # Web Application
 
-The generated web application at web-core-template `v0.7.0`, with every feature of the `native-ios` profile on: Next.js 16 App Router, TypeScript, Tailwind v4 + shadcn/ui, Zod, optional React Hook Form, a versioned REST API with RFC 9457 errors, PostgreSQL 17 (Docker Compose or the local Supabase stack), plain SQL migrations, a server-only data layer, Better Auth with database sessions, a least-privilege `app_runtime` role with row-level security, bearer tokens for native clients, and a deterministic OpenAPI 3.1 contract.
+The generated web application at web-core-template `v0.7.x` (`v0.7.1` generates byte-identically to `v0.7.0`), with every feature of the `native-ios` profile on: Next.js 16 App Router, TypeScript, Tailwind v4 + shadcn/ui, Zod, optional React Hook Form, a versioned REST API with RFC 9457 errors, PostgreSQL 17 (Docker Compose or the local Supabase stack), plain SQL migrations, a server-only data layer, Better Auth with database sessions, a least-privilege `app_runtime` role with row-level security, bearer tokens for native clients, and a deterministic OpenAPI 3.1 contract.
 
 ## Full-stack runtime architecture
 
