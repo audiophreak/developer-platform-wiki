@@ -30,7 +30,7 @@ uv run copier copy --vcs-ref v0.7.0 --defaults \
   https://github.com/audiophreak/web-core-template.git ../my-app
 
 # the native layer into an existing web project (from its root, clean tree)
-uv run copier copy --vcs-ref v0.1.0 --data app_name=my-app \
+uv run copier copy --vcs-ref v0.1.1 --data app_name=my-app \
   https://github.com/audiophreak/native-ios-template.git .
 ```
 
@@ -52,7 +52,7 @@ uv run copier copy --vcs-ref v0.1.0 --data app_name=my-app \
 git status                                         # must be clean
 uv run copier update --vcs-ref v0.7.0 --defaults --skip-answered
 uv run copier update --vcs-ref v0.7.0 --defaults --skip-answered --data rest_api=true   # enable a feature
-uv run copier update --answers-file .copier-answers.ios.yml --vcs-ref v0.1.0 --defaults --skip-answered  # native layer
+uv run copier update --answers-file .copier-answers.ios.yml --vcs-ref v0.1.1 --defaults --skip-answered  # native layer
 ```
 
 | Option | Meaning |

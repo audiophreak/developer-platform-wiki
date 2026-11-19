@@ -14,7 +14,7 @@ The native layer is built and tested from the command line through small scripts
 | `sh scripts/check-release-config.sh` | Builds **Release** for the simulator SDK unsigned and asserts the built `Info.plist` has `APIScheme=https` and **no** `NSAppTransportSecurity` key |
 | `sh scripts/check-static.sh` | Greps sources for ATS opt-outs, trust overrides, logged tokens, credentials in UserDefaults or files, hard-coded http URLs, secrets, committed team IDs, server credentials |
 
-Build products go to `ios/.derived-data/` (ignored). `check-release-config.sh` also writes `ios/.derived-data-release.log`, which **is not ignored**: remove or ignore it before an upgrade ([troubleshooting](../troubleshooting/git-copier-ci.md#upgrade-refused-after-running-the-ios-checks)).
+Build products and logs go to `ios/.derived-data/` (ignored); `check-release-config.sh` writes its build log to `ios/.derived-data/release.log` and, on failure, prints its last 30 lines and names it. Running any of these scripts leaves no Git-visible file. (Native v0.1.0 wrote the log to an un-ignored `ios/.derived-data-release.log`; see [troubleshooting](../troubleshooting/git-copier-ci.md#upgrade-refused-after-running-the-ios-checks).)
 
 ## xcodebuild
 

@@ -1,6 +1,6 @@
 # Native iOS: app structure
 
-The native layer (`native-ios-template` v0.1.0) adds a small SwiftUI app in `ios/` that uses the project's `/api/v1`: sign in or create a local account, see the session, list/create/edit/delete items, loading and empty states, problem-details errors, sign out. It is **an architecture to extend, not a design system**.
+The native layer (`native-ios-template` v0.1.1) adds a small SwiftUI app in `ios/` that uses the project's `/api/v1`: sign in or create a local account, see the session, list/create/edit/delete items, loading and empty states, problem-details errors, sign out. It is **an architecture to extend, not a design system**.
 
 | | |
 |---|---|

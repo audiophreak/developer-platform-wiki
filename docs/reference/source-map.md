@@ -8,7 +8,8 @@ This manual was written on 2026-11-19 from the released source and verified agai
 |---|---|---|---|---|
 | developer-platform | `v0.8.0` | `13d9dd6b81954fcd4439f8147630449deb983f50` | `e185d6d2c4ac9edde5db7963458c8146e4c229d2` | GitHub API (`git/ref/tags` → `git/tags`), local clean checkout `HEAD` |
 | web-core-template | `v0.7.0` | `90e09368844de6c1f81f3d87547980bcbf442289` | `094e35b8b32d6186d609695f940afeb91a9b5990` | same |
-| native-ios-template | `v0.1.0` | `97a3a7ce531b93e01507a8d88da0f88de79d2372` | `cd346a01223f82e629649a71fc4d312e4e5c7746` | same |
+| native-ios-template | **`v0.1.1`** (current) | `8591c9cd48b829563c74b4cdccec1ce14082e2d5` | `f0f4a5a8ac58825e94a38068df1bdd413d2f1596` | same; native CI green on the PR and on `main` |
+| native-ios-template | `v0.1.0` (original accepted release, superseded) | `97a3a7ce531b93e01507a8d88da0f88de79d2372` | `cd346a01223f82e629649a71fc4d312e4e5c7746` | same; tag unchanged |
 
 All three repositories reported `visibility: private` and default branch `main`. The source repositories were inspected read-only; their working trees were clean before and after.
 
@@ -47,14 +48,29 @@ The manual documents the **code's** behaviour. These repository documents disagr
 
 | Where | Says | Actual behaviour at the baseline |
 |---|---|---|
-| `native-ios-template/README.md` | `devkit new NAME --profile native-ios --database postgres` | the option is `--set database=postgres` (there is no `--database` flag) |
-| generated `ios/README.md` (native v0.1.0) | upgrade with `devkit upgrade-native` | the command is `devkit upgrade PROJECT --layer native` |
 | `web-core-template/README.md` | "everything, 129 tests"; e2e "generates five apps" | 919 tests collected at v0.7.0 (32 `e2e`, 109 `db`) |
 | `developer-platform/README.md` | "one of two repositories" | three repositories since v0.8.0 (the README's v0.8 paragraph is correct) |
 | `developer-platform/docs/usage.md` (upgrade section) | range `>=0.1.0,<0.7.0 … at devkit 0.7.0` | devkit 0.8.0 supports `>=0.1.0,<0.8.0` (historical wording) |
 | `developer-platform/docs/ci-evidence.md` | "Twenty-six tests … skip in CI" | 28 `integration`-marked tests at v0.8.0 (including the native pair tests) |
-| `native-ios-template` scripts | – | `check-release-config.sh` writes `ios/.derived-data-release.log`, which no `.gitignore` covers, so a later upgrade sees an untracked file |
 | `developer-platform/Brewfile` | Docker cask commented out | Docker is required by every database project and the e2e; `doctor` treats it as optional (warn) |
+
+### Resolved in native-ios-template v0.1.1
+
+These were listed here at the original baseline and are fixed in the current release (see [the patch](../releases/index.md#the-native-v011-corrective-patch)):
+
+| Where (v0.1.0) | Was | Now (v0.1.1) |
+|---|---|---|
+| generated `ios/README.md` | named a devkit subcommand that does not exist | documents `devkit status PROJECT` and `devkit upgrade PROJECT --layer native` / `--layer web`; a regression test checks every documented devkit command |
+| `native-ios-template/README.md` | `devkit new … --database postgres` | `--set database=postgres` |
+| `ios/scripts/check-release-config.sh` | wrote the un-ignored `ios/.derived-data-release.log` | writes `ios/.derived-data/release.log` (ignored); Xcode tests prove a committed project stays clean |
+
+## Verification of the v0.1.1 update
+
+- Tag `v0.1.1` → `f0f4a5a…` via the GitHub API; `v0.1.0` still → `cd346a0…`; repository private.
+- `git diff v0.1.0 v0.1.1` touches only `CHANGELOG.md`, `README.md`, `template/ios/README.md.jinja`, `template/ios/scripts/check-release-config.sh` and two test files.
+- `pytest --collect-only` at `v0.1.1`: 58 tests (51 non-Xcode, 7 Xcode).
+- Published acceptance of devkit v0.8.0 + web v0.7.0 + native v0.1.1: **177 / 177** ([details](../testing/release-gates.md#acceptance-of-the-native-v011-patch-177-177)).
+- No devkit or web-core-template change was needed or made.
 
 ## Facts that could not be documented conclusively
 

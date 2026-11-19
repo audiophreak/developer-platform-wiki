@@ -16,7 +16,7 @@ flowchart TB
     wl[locks/<br/>11 lockfiles]
     wfe[features.yml]
   end
-  subgraph NT ["native-ios-template  (v0.1.0)"]
+  subgraph NT ["native-ios-template  (v0.1.1)"]
     nq[copier.yml]
     nf["template/ios/<br/>SwiftUI app + generated client"]
     nc[tools/web_contract.json<br/>web v0.7.0 contract sha256]

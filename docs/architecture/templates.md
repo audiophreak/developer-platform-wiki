@@ -65,7 +65,7 @@ native-ios-template/
 │   └── AGENTS.md CLAUDE.md README.md
 ├── tools/gen_pbxproj.py    # generates the committed, static App.xcodeproj
 ├── tools/web_contract.json # {"web_core_template_release": "v0.7.0", "sha256": "a42effbd…"}
-└── tests/                  # 43 tests: render, layering, static rules, pins and ages, update; xcode (5)
+└── tests/                  # 58 tests: render, layering, static rules, pins and ages, update, documented devkit commands; xcode (7)
 ```
 
 Only `Config/*.xcconfig`, `README.md` and `AGENTS.md` are templated. The Xcode project, Swift sources and the generated client are verbatim, so a rendered project is reviewable and the client can be regenerated with zero diff.

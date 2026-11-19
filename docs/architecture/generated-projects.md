@@ -52,7 +52,7 @@ zod: true
 ```
 
 ```yaml title=".copier-answers.ios.yml"
-_commit: v0.1.0
+_commit: v0.1.1
 _src_path: https://github.com/audiophreak/native-ios-template.git
 app_display_name: Nat App
 app_name: nat-app

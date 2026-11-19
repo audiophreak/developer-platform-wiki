@@ -19,13 +19,15 @@ SCANNED = [ROOT / "docs", ROOT / "scripts", ROOT / "README.md", ROOT / "zensical
 EXPECTED_SHAS = {
     "developer-platform": "e185d6d2c4ac9edde5db7963458c8146e4c229d2",
     "web-core-template": "094e35b8b32d6186d609695f940afeb91a9b5990",
-    "native-ios-template": "cd346a01223f82e629649a71fc4d312e4e5c7746",
+    "native-ios-template": "f0f4a5a8ac58825e94a38068df1bdd413d2f1596",  # v0.1.1
 }
 # Other full SHAs that may legitimately appear (annotated tag objects, pinned actions, a contract checksum prefix).
 ALLOWED_SHAS = {
     "13d9dd6b81954fcd4439f8147630449deb983f50",  # tag object developer-platform v0.8.0
     "90e09368844de6c1f81f3d87547980bcbf442289",  # tag object web-core-template v0.7.0
-    "97a3a7ce531b93e01507a8d88da0f88de79d2372",  # tag object native-ios-template v0.1.0
+    "97a3a7ce531b93e01507a8d88da0f88de79d2372",  # tag object native-ios-template v0.1.0 (original accepted release)
+    "cd346a01223f82e629649a71fc4d312e4e5c7746",  # commit native-ios-template v0.1.0 (release history)
+    "8591c9cd48b829563c74b4cdccec1ce14082e2d5",  # tag object native-ios-template v0.1.1
     "3d3c42e5aac5ba805825da76410c181273ba90b1",  # actions/checkout v7.0.1
     "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",  # actions/setup-python v7.1.0
 }

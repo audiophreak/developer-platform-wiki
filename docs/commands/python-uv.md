@@ -27,8 +27,8 @@ Python is the platform and template-test language. Every Python repository (`dev
 | | `uv run pytest -m e2e` | Generate apps, `npm ci` + `npm run check` in each (needs Node 26, network) | 32 |
 | | `uv run pytest -m db` | Real PostgreSQL and Supabase in Docker (needs a running daemon) | 109 |
 | | `uv run pytest` | Everything | 919 collected |
-| `native-ios-template` | `uv run pytest -m "not xcode"` | Rendering, layering, static rules, pins, update | 38 |
-| | `uv run pytest -m xcode` | Generated client, `swift test`, `xcodebuild` on a simulator | 5 |
+| `native-ios-template` | `uv run pytest -m "not xcode"` | Rendering, layering, static rules, pins, update, documented devkit commands | 51 |
+| | `uv run pytest -m xcode` | Generated client, `swift test`, `xcodebuild` on a simulator, the Release check leaves the tree clean | 7 |
 
 Counts are collected tests at the release tags (`pytest --collect-only`); markers overlap slightly in the web template.
 

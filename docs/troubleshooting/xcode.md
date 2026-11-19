@@ -161,4 +161,4 @@ sh ios/scripts/test.sh app
 
 ## Upgrade refused after running the iOS checks
 
-See [Copier, Git and CI](git-copier-ci.md#upgrade-refused-after-running-the-ios-checks): `check-release-config.sh` leaves an untracked `ios/.derived-data-release.log`.
+Only projects still on native **v0.1.0**: see [Copier, Git and CI](git-copier-ci.md#upgrade-refused-after-running-the-ios-checks). Fixed in v0.1.1.

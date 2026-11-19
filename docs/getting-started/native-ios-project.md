@@ -22,13 +22,13 @@ uv run devkit new field-notes --profile native-ios --set database=postgres \
 
 What happens (details in [Generation flow and atomicity](../architecture/generation-flow.md)):
 
-1. Both templates are resolved to release tags (web `v0.7.0`, native `v0.1.0`) and the pair is checked against `NATIVE_REQUIRES_WEB` (native 0.1.x needs web `>=0.7.0,<0.8.0`).
+1. Both templates are resolved to release tags (web `v0.7.0`, native `v0.1.1`) and the pair is checked against `NATIVE_REQUIRES_WEB` (native 0.1.x needs web `>=0.7.0,<0.8.0`).
 2. The web layer is rendered into a hidden staging directory `../.field-notes.devkit-partial`.
 3. The native layer is rendered into the same staging directory.
 4. Only when both succeeded is the staging directory renamed to `../field-notes`.
 
 ```text
-Native iOS layer: https://github.com/audiophreak/native-ios-template.git @ v0.1.0
+Native iOS layer: https://github.com/audiophreak/native-ios-template.git @ v0.1.1
 
 Created .../field-notes
 
@@ -53,7 +53,7 @@ uv run --project ~/Developer/developer-platform devkit status .
 
 ```text
 web     v0.7.0    up to date
-native  v0.1.0    up to date
+native  v0.1.1    up to date
 ```
 
 Two answers files now exist: `.copier-answers.yml` (web, records `native_client: true`) and `.copier-answers.ios.yml` (native, records `_src_path`, `_commit: v0.1.0` and the `--native-set` answers).

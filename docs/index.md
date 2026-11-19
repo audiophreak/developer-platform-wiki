@@ -2,15 +2,15 @@
 
 The owner, operator and developer manual for the **accepted Developer Platform baseline**: what each part does, why it exists, how the parts work together, and how to generate, build, test, upgrade, troubleshoot and recover applications with it.
 
-!!! success "Accepted baseline: 151 / 151 published acceptance gates passed"
+!!! success "Accepted baseline: native v0.1.1 patch accepted, 177 / 177 published acceptance gates passed"
 
     | Repository | Release | Commit |
     |---|---|---|
     | `audiophreak/developer-platform` | `v0.8.0` | `e185d6d2c4ac9edde5db7963458c8146e4c229d2` |
     | `audiophreak/web-core-template` | `v0.7.0` | `094e35b8b32d6186d609695f940afeb91a9b5990` |
-    | `audiophreak/native-ios-template` | `v0.1.0` | `cd346a01223f82e629649a71fc4d312e4e5c7746` |
+    | `audiophreak/native-ios-template` | `v0.1.1` | `f0f4a5a8ac58825e94a38068df1bdd413d2f1596` |
 
-    Every statement in this manual was checked against these tags. See [Accepted baseline](releases/index.md) and the [source verification map](reference/source-map.md).
+    The original baseline (native `v0.1.0`, 151 / 151 gates) is preserved in the [release history](releases/history.md). Every statement in this manual was checked against these tags. See [Accepted baseline](releases/index.md) and the [source verification map](reference/source-map.md).
 
 ## The platform in one picture
 
@@ -18,7 +18,7 @@ The owner, operator and developer manual for the **accepted Developer Platform b
 flowchart LR
   you([You or an AI agent]) -->|devkit new / upgrade / status| devkit[developer-platform<br/>devkit CLI]
   devkit -->|resolves a release tag,<br/>runs Copier| web[web-core-template<br/>v0.7.0]
-  devkit -->|second layer,<br/>native-ios profile| ios[native-ios-template<br/>v0.1.0]
+  devkit -->|second layer,<br/>native-ios profile| ios[native-ios-template<br/>v0.1.1]
   web -->|renders everything except ios/| app[(Generated application<br/>repository)]
   ios -->|renders only ios/| app
   app --> next[Next.js app + REST API v1<br/>+ PostgreSQL + Better Auth]

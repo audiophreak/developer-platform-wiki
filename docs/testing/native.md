@@ -35,8 +35,8 @@ cd .. && node ios/scripts/e2e.mjs --down
 
 | Command | Tests | Proves |
 |---|---|---|
-| `uv run pytest -m "not xcode"` (38) | `test_render.py`, `test_update.py`, `test_dependencies.py` | answers validated; only `ios/` and its answers file are written (never a web file); no secrets, team ids, provisioning or home paths; static rules; dependency pins equal the documented table and are ≥ 14 days old; `copier update` of the layer alone |
-| `uv run pytest -m xcode` (5) | `test_xcode.py` | the stale-contract check fails as designed; the generated client; `swift test`; `xcodebuild` on a simulator |
+| `uv run pytest -m "not xcode"` (51) | `test_render.py`, `test_update.py`, `test_dependencies.py`, `test_docs_commands.py` | answers validated; only `ios/` and its answers file are written (never a web file); no secrets, team ids, provisioning or home paths; static rules; dependency pins equal the documented table and are ≥ 14 days old; `copier update` of the layer alone; every devkit command in the docs exists in devkit 0.8.0 (no `upgrade-native`) |
+| `uv run pytest -m xcode` (7) | `test_xcode.py` | the stale-contract check fails as designed; the generated client; `swift test`; `xcodebuild` on a simulator; a committed project stays clean after the Release check, passing and failing, and Copier's update of the layer is not refused |
 | `uv run python tools/gen_pbxproj.py --check` | | the committed Xcode project equals the generator's output |
 
 CI runs `-m "not xcode"` on Ubuntu, and on `macos-26` renders the layer into a throwaway project and runs every script above except e2e, then `-m xcode`.

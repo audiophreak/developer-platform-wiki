@@ -14,7 +14,7 @@ git status --short
 |---|---|
 | your own work in progress | `git add -A && git commit -m "wip: …"` on a branch, or `git stash -u` |
 | `?? supabase/.temp/`, `?? supabase/.branches/` (pre-0.6.0 Supabase project) | add both to `.gitignore`, commit |
-| `?? ios/.derived-data-release.log` (after `check-release-config.sh`) | add `ios/.derived-data-release.log` to `.gitignore` and commit, or move the file out of the project |
+| `?? ios/.derived-data-release.log` (left by the **v0.1.0** `check-release-config.sh`) | move the file out of the project (`mv ios/.derived-data-release.log "$(mktemp -d)/"`), then `devkit upgrade PROJECT --layer native` to v0.1.1, whose check keeps its log in the ignored `ios/.derived-data/` |
 | `?? .env.local` | should be ignored (`.env*`); if not, your `.gitignore` was edited: restore the template's line |
 | `M AGENTS.md` (the Next.js agent block re-added) | `next dev` writes that block; commit it (the generated `AGENTS.md` says removing it only re-creates the change) |
 

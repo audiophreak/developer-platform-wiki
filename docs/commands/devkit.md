@@ -97,7 +97,7 @@ uv run devkit new scratch --template ../web-core-template --output-dir /tmp   # 
 | `Option 'native_client' needs template v0.7.0 or newer` | 2 | `--template-ref` too old for the option. |
 | `Validation error for question 'forms': forms requires zod` | 2 | Template rule; add the prerequisite explicitly. |
 | `Profile 'full-stack' needs an explicit choice for database` | 2 | Add `--set database=postgres` or `supabase`. |
-| `native-ios-template v0.1.0 works with web-core-template >=0.7.0,<0.8.0` | 2 | Incompatible pair of releases. |
+| `native-ios-template v0.1.1 works with web-core-template >=0.7.0,<0.8.0` | 2 | Incompatible pair of releases. |
 
 ---
 
@@ -111,10 +111,10 @@ uv run devkit status PROJECT
 
 ```text
 web     v0.7.0    up to date
-native  v0.1.0    up to date
+native  v0.1.1    up to date
 ```
 
-**Failure modes.** Exit 1 if the project has no answers file, or if the two installed releases do not belong together (`warning: native v0.1.0 works with web >=0.7.0,<0.8.0 …`). It reads remote tags, so it needs template access; an unreachable origin is shown as a note rather than an error.
+**Failure modes.** Exit 1 if the project has no answers file, or if the two installed releases do not belong together (`warning: native v0.1.1 works with web >=0.7.0,<0.8.0 …`). It reads remote tags, so it needs template access; an unreachable origin is shown as a note rather than an error.
 
 ---
 

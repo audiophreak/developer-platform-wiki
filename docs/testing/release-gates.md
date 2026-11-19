@@ -55,6 +55,19 @@ The evidence directory holds three runs of the same audit:
 
 Neither earlier run indicated a defect in the released code; both were environment or audit-harness issues, and each is now a documented [troubleshooting](../troubleshooting/database.md#stale-docker-volumes-and-28p01) entry or a gate.
 
+## Acceptance of the native v0.1.1 patch: 177 / 177
+
+After `native-ios-template v0.1.1` was tagged, the same fail-closed harness was rerun against the published combination (devkit v0.8.0, web v0.7.0, native v0.1.1) as `~/Claude/audit-native-v0.1.1.py`, derived from the accepted audit with native expectations moved to v0.1.1 and **26 additional gates**:
+
+| Group | Gates | Checks |
+|---|---:|---|
+| All original groups | 151 | as above, with native tag `v0.1.1` → `f0f4a5a…`, native provenance v0.1.1, and local native `main` at the merge commit |
+| Patch gates, per native project (×2) | 10 | no Git-visible file after all native gates **including the Release check**; the Release log kept at `ios/.derived-data/release.log`; `devkit status` after the check; `upgrade --layer native --dry-run` after the check not refused; the generated README documents `devkit upgrade PROJECT --layer native` and no `upgrade-native` |
+| Existing v0.1.0 project upgraded | 16 | generate with `--native-template-ref v0.1.0`; `devkit status` reports `native v0.1.0 newer available: v0.1.1`; the v0.1.0 Release check reproduces `?? ios/.derived-data-release.log` and **devkit upgrade refuses** (exit 1); after moving that one file, the dry run plans `v0.1.0 -> v0.1.1`; the upgrade succeeds and changes exactly `.copier-answers.ios.yml`, `ios/README.md`, `ios/scripts/check-release-config.sh`; both layers up to date; the v0.1.1 Release check leaves the tree clean; a later dry run is not refused |
+| **Total** | **177** | **177 passed, 0 failed** |
+
+Evidence: `~/Claude/audit-evidence/native-v0.1.1-audit.tsv` (`TOTAL gates 177 passed 177 failed 0`). The real end-to-end scenario passed again for both providers (sign-in, Keychain token, session, CRUD, cross-user denial, server and database restart, relaunch, sign-out, old token 401).
+
 ## Running an acceptance yourself
 
-The audit script lives outside the repositories, in the owner's `~/Claude` directory, and is not part of any release. Its structure is reproducible from the table above: work in a fresh `tools/scratch.py new` workspace, clone the platform at its tag, generate every profile × provider from GitHub, and assert each gate with exit codes and parsed counts. Before starting: no running containers and no leftover volumes for these projects.
+The audit script lives outside the repositories, in the owner's `~/Claude` directory, and is not part of any release. Its structure is reproducible from the table above: work in a fresh `tools/scratch.py new` workspace, clone the platform at its tag, generate every profile × provider from GitHub, and assert each gate with exit codes and parsed counts. Before starting: no running containers and no leftover volumes for these projects. A completed run leaves its projects' named volumes behind (`db:down` keeps data by design), so the next run's preflight requires removing them first, deliberately.

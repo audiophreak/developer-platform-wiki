@@ -34,7 +34,7 @@ flowchart LR
   end
   subgraph A [Published-pair acceptance]
     a1[fresh clone at tags<br/>generate from GitHub<br/>every profile × provider]
-    a2[151 fail-closed gates<br/>151 passed]
+    a2[fail-closed gates<br/>177 / 177 passed]
   end
   L --> C --> R --> T --> A
   A -. a failure means fix forward,<br/>new patch release .-> L
@@ -48,7 +48,7 @@ The order across repositories is fixed: **web template → native template → p
 |---|---|---|
 | developer-platform | `uv run pytest` | 503 collected (28 `integration`) |
 | web-core-template | `uv run pytest` | 919 collected (32 `e2e`, 109 `db`) |
-| native-ios-template | `uv run pytest` | 43 collected (5 `xcode`) |
+| native-ios-template (v0.1.1) | `uv run pytest` | 58 collected (7 `xcode`) |
 | generated basic web project | `npm run check` (Vitest) | 3 |
 | generated full-stack project | `npm run check` / `npm run test:db` | 248 / 70 |
 | generated native-ios project (web part) | `npm run check` / `npm run test:db` | 257 / 70 |
@@ -61,4 +61,4 @@ Counts for the generated projects are from the published acceptance run; reposit
 - [Web and generated-project tests](web.md): unit, generated-project, PostgreSQL, Supabase, auth/authorization, OpenAPI drift.
 - [Native tests](native.md): host, simulator package, hosted Keychain, native e2e.
 - [GitHub CI versus local](ci.md): what runs where and why.
-- [Release gates and acceptance](release-gates.md): the live gate, byte identity, and the 151-gate acceptance.
+- [Release gates and acceptance](release-gates.md): the live gate, byte identity, and the published-pair acceptance (151 gates for v0.1.0, 177 for v0.1.1).

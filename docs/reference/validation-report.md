@@ -1,6 +1,20 @@
 # Validation report
 
-Validation of this manual before publication, 2026-11-19.
+Validation of this manual before publication, 2026-11-19, and its revalidation for the native v0.1.1 baseline update.
+
+## Revalidation: native-ios-template v0.1.1 (current baseline)
+
+| Check | Result |
+|---|---|
+| Strict build (`zensical build --clean --strict`) | **No issues found** |
+| Internal links and anchors (`check_links.py`) | 68 pages in navigation; **156** links and anchors resolve |
+| Content and security scan (`check_content.py`) | clean; current native SHA `f0f4a5a…`, with v0.1.0's commit and tag object allowed as history |
+| Mermaid rendering (headless Chrome, closed shadow roots pierced) | **22 / 22** rendered, 0 errors, two consecutive runs; the probe now also requires each page to render exactly the number of diagrams in its Markdown source (a negative control with a wrong count fails) |
+| devkit syntax in examples | every `devkit` invocation in the wiki's code spans and blocks (176) checked with native v0.1.1's own validator (`tests/test_docs_commands.py`); no invalid command; every native upgrade example uses `devkit upgrade PROJECT --layer native` |
+| Facts | v0.1.1 tag → `f0f4a5a…` (tag object `8591c9c…`) and v0.1.0 → `cd346a0…` via the GitHub API; native repository private; 58 tests collected at v0.1.1; acceptance evidence `TOTAL gates 177 passed 177 failed 0` |
+| Architecture diagrams | structure unchanged (the patch changed no architecture); only the native version label in two diagrams moved from v0.1.0 to v0.1.1 |
+
+## Original validation (native v0.1.0 baseline)
 
 ## Build
 

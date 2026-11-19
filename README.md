@@ -6,9 +6,9 @@ The private owner, operator and developer manual for the accepted Developer Plat
 |---|---|---|
 | `audiophreak/developer-platform` | `v0.8.0` | `e185d6d2c4ac9edde5db7963458c8146e4c229d2` |
 | `audiophreak/web-core-template` | `v0.7.0` | `094e35b8b32d6186d609695f940afeb91a9b5990` |
-| `audiophreak/native-ios-template` | `v0.1.0` | `cd346a01223f82e629649a71fc4d312e4e5c7746` |
+| `audiophreak/native-ios-template` | `v0.1.1` | `f0f4a5a8ac58825e94a38068df1bdd413d2f1596` |
 
-Published acceptance: **151 / 151 gates passed**.
+Published acceptance of the current combination: **177 / 177 gates passed** (the original baseline with native `v0.1.0`: 151 / 151).
 
 Markdown source in `docs/`, built with [Zensical](https://zensical.org/) into a static site for local browsing. Dark theme by default; Mermaid diagrams.
 

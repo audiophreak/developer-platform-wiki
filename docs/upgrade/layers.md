@@ -10,19 +10,19 @@ uv run devkit status PROJECT
 
 ```text
 web     v0.7.0    up to date
-native  v0.1.0    up to date
+native  v0.1.1    up to date
 ```
 
 When something is newer:
 
 ```text
 web     v0.7.0    newer available: v0.7.1
-native  v0.1.0    up to date
+native  v0.1.1    up to date
 
 The project is NOT fully upgraded. Upgrade one layer at a time: devkit upgrade PROJECT --layer web|native
 ```
 
-If the installed pair does not belong together, `status` prints `warning: native v0.1.0 works with web >=0.7.0,<0.8.0, but the web layer is at …` and exits 1.
+If the installed pair does not belong together, `status` prints `warning: native v0.1.1 works with web >=0.7.0,<0.8.0, but the web layer is at …` and exits 1.
 
 ## `--layer`
 
@@ -79,7 +79,23 @@ If the contract changed, `sh ios/scripts/sync-contract.sh`, fix and test the app
     copier update --answers-file .copier-answers.ios.yml --vcs-ref v0.1.x --defaults --skip-answered
     ```
 
-    Raw Copier also does not check the release pair. Prefer `devkit upgrade --layer native`.
+    Raw Copier also does not check the release pair. Prefer `devkit upgrade PROJECT --layer native`.
 
-!!! note "A documentation discrepancy"
-    The generated `ios/README.md` (native template v0.1.0) says the layer is upgraded with `devkit upgrade-native`. No such command exists in devkit 0.8.0; the command is `devkit upgrade PROJECT --layer native`. See the [source verification map](../reference/source-map.md#known-discrepancies-in-the-source-repositories).
+!!! note "Fixed in native v0.1.1"
+    The generated `ios/README.md` of native **v0.1.0** named a devkit subcommand that does not exist. From **v0.1.1** it documents exactly this workflow: `devkit status PROJECT`, `devkit upgrade PROJECT --layer native` and `--layer web` (with `--dry-run`), one layer at a time from a clean tree, and the raw Copier command with its required `--answers-file`. A regression test in the template checks every documented devkit command against devkit 0.8.0's command line.
+
+## Upgrading a v0.1.0 native layer to v0.1.1
+
+Verified in the published acceptance (devkit v0.8.0 unchanged):
+
+```bash
+devkit status PROJECT                          # native  v0.1.0    newer available: v0.1.1
+git -C PROJECT status --porcelain              # must be empty; if it lists ?? ios/.derived-data-release.log
+                                               # (left by the v0.1.0 Release check), move that file out of the project
+devkit upgrade PROJECT --layer native --dry-run    # Upgrading v0.1.0 -> v0.1.1
+devkit upgrade PROJECT --layer native
+git -C PROJECT status --short                  # exactly: .copier-answers.ios.yml, ios/README.md, ios/scripts/check-release-config.sh
+git -C PROJECT add -A && git -C PROJECT commit -m "chore: update native template to v0.1.1"
+```
+
+No web-layer change is involved: native 0.1.x pairs with web `>=0.7.0,<0.8.0`, so the pair rule is satisfied before and after.

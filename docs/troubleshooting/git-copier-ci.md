@@ -28,13 +28,15 @@ git diff
 
 ### Upgrade refused after running the iOS checks
 
-**Symptom.** A clean tree becomes dirty after `sh ios/scripts/check-release-config.sh`: `?? ios/.derived-data-release.log`.
+**Status.** **Fixed in native-ios-template v0.1.1.** Affects only projects whose native layer is still v0.1.0.
 
-**Cause.** The script writes its build log to `ios/.derived-data-release.log`, and neither `ios/.gitignore` (which ignores `.derived-data/`) nor the root `.gitignore` covers that file. The acceptance audit filters it explicitly.
+**Symptom.** A clean tree becomes dirty after `sh ios/scripts/check-release-config.sh`: `?? ios/.derived-data-release.log`, and the next `devkit upgrade` exits 1 (`has uncommitted changes (modified or untracked files)`).
 
-**Recovery.** Add `ios/.derived-data-release.log` to the project's `.gitignore` and commit, or move the log out of the project before upgrading.
+**Cause.** The v0.1.0 script wrote its build log to `ios/.derived-data-release.log`, which neither `ios/.gitignore` (it ignores `.derived-data/`) nor the root `.gitignore` covers. v0.1.1 writes the log to `ios/.derived-data/release.log`, inside the ignored build area, and still prints its last 30 lines (and names it) when the build fails.
 
-**Evidence.** *Repository source* (`check-release-config.sh`, `ios/.gitignore`; the acceptance script's filter). Not yet fixed in native template v0.1.0.
+**Recovery.** Move the stray log out of the project (`mv ios/.derived-data-release.log "$(mktemp -d)/"`), confirm `git status --porcelain` is empty, then upgrade the native layer to v0.1.1 ([procedure](../upgrade/layers.md#upgrading-a-v010-native-layer-to-v011)). Do not add the file to `.gitignore` by hand; the upgrade removes the cause.
+
+**Evidence.** *Repository source* (native v0.1.1 `CHANGELOG.md`, `check-release-config.sh`, and the regression tests `tests/test_xcode.py`); *acceptance runs*: the v0.1.1 audit reproduced the defect on a v0.1.0 project (devkit upgrade refused, exit 1), upgraded it, and showed the tree stays clean afterwards.
 
 ## Upgrade refused: provenance
 

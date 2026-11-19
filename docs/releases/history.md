@@ -15,7 +15,8 @@ timeline
   section 18–19 Nov
     Authentication : devkit v0.7.0 : template v0.6.0, v0.6.1 (security patch)
     Native iOS : template v0.7.0 (native_client) : native-ios-template v0.1.0 : devkit v0.8.0
-    Acceptance : 151 / 151 gates
+    Acceptance : 151 / 151 gates (native v0.1.0)
+    Native patch : native-ios-template v0.1.1 : 177 / 177 gates
 ```
 
 ## Milestones
@@ -30,7 +31,8 @@ timeline
 | 5 | devkit **v0.6.0** (`dc21f30`), template **v0.5.0** (`4b4c250`), **v0.5.1** (`c86699d`) | `database` = postgres \| supabase; SQL migrations; server-only data layer | first **choice** feature and first **sticky** option; Supabase as a provider, not an architecture; a separate CI `database` job with Docker; 0.5.1 fixed `db:status` on Supabase |
 | 6 | devkit **v0.7.0** (`95db1c2`), template **v0.6.0** (`62e3f87`), **v0.6.1** (`12d3332`) | `auth`: Better Auth, `app_runtime`, RLS, protected API | **Better Auth on PostgreSQL for both providers** (Supabase Auth rejected); three-layer deny-by-default authorization; `sticky_reason`; 0.6.1 bumped Better Auth 1.7.15 → 1.7.16 for 12 advisories (reviewed as not exploitable in this configuration) |
 | 7 | template **v0.7.0** (`094e35b`), native-ios-template **v0.1.0** (`cd346a0`), devkit **v0.8.0** (`e185d6d`) | `native_client` (bearer, OpenAPI 3.1); the SwiftUI app; `full-stack` and `native-ios` profiles; `devkit status`, `native add`, `upgrade --layer` | **template layering** in one directory (prototyped and adopted); `NATIVE_REQUIRES_WEB` pair rule; **staged, atomic two-layer generation** with `.devkit-partial`; generated Swift client with zero-diff regeneration in CI; hosted Keychain tests; local native e2e gate |
-| 8 | – | **published-pair acceptance: 151 / 151** | fail-closed audit; preflight against stale Docker volumes |
+| 8 | – | **published-pair acceptance: 151 / 151** (native v0.1.0, the original accepted baseline) | fail-closed audit; preflight against stale Docker volumes |
+| 9 | native-ios-template **v0.1.1** (`f0f4a5a`) | corrective patch: the generated `ios/README.md` documents `devkit upgrade PROJECT --layer native` (v0.1.0 named a non-existent subcommand); `check-release-config.sh` keeps its log in the ignored `ios/.derived-data/` (v0.1.0 left an un-ignored `ios/.derived-data-release.log` that made the next upgrade refuse) | no architecture, contract, client, dependency or behaviour change; devkit v0.8.0 unchanged (native range `>=0.1.0,<0.2.0`); regression tests for documented devkit commands and for a clean tree after the Release check; **published acceptance 177 / 177**, including a real v0.1.0 → v0.1.1 layer upgrade |
 
 ## Decisions that shaped the platform
 
@@ -50,5 +52,5 @@ timeline
 
 - **Template first, platform second, acceptance last**, every time.
 - **Byte identity** with the previous release whenever a feature is off.
-- **Fix forward**: a security patch (0.6.1) and a bug fix (0.5.1) shipped as patch releases; no tag was ever moved.
-- **Incidents become rules and tests**: the delete incident, the boolean cast, the numeric commit hash, the Supabase CLI's untracked folders, stale Docker volumes.
+- **Fix forward**: a security patch (web 0.6.1), a bug fix (web 0.5.1) and a corrective patch (native 0.1.1) shipped as patch releases; no tag was ever moved.
+- **Incidents become rules and tests**: the delete incident, the boolean cast, the numeric commit hash, the Supabase CLI's untracked folders, stale Docker volumes, and (native 0.1.1) a documented command that did not exist and a validation script that dirtied the tree.
