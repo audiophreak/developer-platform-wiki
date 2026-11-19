@@ -1,0 +1,143 @@
+[project]
+site_name = "Developer Platform Knowledge Base"
+site_description = "A technical learning and operations manual for the AI-assisted Developer Platform"
+docs_dir = "docs"
+site_dir = "site"
+
+nav = [
+  { "Getting Started" = [
+    "index.md",
+    { "How to use this wiki" = "getting-started/navigation.md" },
+    { "Developer Platform overview" = "getting-started/platform-overview.md" },
+    { "Development workstation" = "getting-started/workstation.md" },
+    { "Create your first application" = "getting-started/first-application.md" },
+  ] },
+  { "Understanding the Ecosystem" = [
+    { "Application development ecosystem" = "ecosystem/overview.md" },
+    { "Frontend and backend" = "ecosystem/frontend-backend.md" },
+    { "Frameworks and languages" = "ecosystem/frameworks-languages.md" },
+    { "Runtimes and package managers" = "ecosystem/runtimes-packages.md" },
+    { "Dependencies and build systems" = "ecosystem/dependencies-builds.md" },
+    { "Source control, CI/CD, deployment" = "ecosystem/source-control-cicd.md" },
+    { "How the components fit" = "ecosystem/component-map.md" },
+  ] },
+  { "Technology Reference" = [
+    { "Python and uv" = "technology/python-uv.md" },
+    { "Node.js and npm" = "technology/node-npm.md" },
+    { "TypeScript, React, Next.js" = "technology/next-react-typescript.md" },
+    { "Tailwind CSS" = "technology/tailwind.md" },
+    { "shadcn/ui" = "technology/shadcn-ui.md" },
+    { "Copier" = "technology/copier.md" },
+    { "Git and GitHub" = "technology/git-github.md" },
+    { "Claude Code" = "technology/claude-code.md" },
+    { "Vitest and testing" = "technology/vitest.md" },
+    { "GitHub Actions" = "technology/github-actions.md" },
+    { "Zod and input validation" = "technology/zod.md" },
+  ] },
+  { "Developer Platform Architecture" = [
+    { "Architecture overview" = "architecture/overview.md" },
+    { "devkit CLI and Copier" = "architecture/devkit-copier.md" },
+    { "Template architecture and versioning" = "architecture/template-versioning.md" },
+    { "Feature composition" = "architecture/feature-composition.md" },
+    { "Generated application structure" = "architecture/generated-app.md" },
+    { "Testing and validation gates" = "architecture/validation-gates.md" },
+    { "GitHub integration" = "architecture/github-integration.md" },
+    { "Security and trust boundaries" = "architecture/security.md" },
+    { "Application upgrade lifecycle" = "architecture/upgrade-lifecycle.md" },
+  ] },
+  { "Development Workflows" = [
+    { "Start an application" = "workflows/start-app.md" },
+    { "Design an MVP" = "workflows/design-mvp.md" },
+    { "Work with Claude Code" = "workflows/claude-workflow.md" },
+    { "Make changes safely" = "workflows/safe-changes.md" },
+    { "Test an application" = "workflows/testing.md" },
+    { "Branches and pull requests" = "workflows/branches-prs.md" },
+    { "Update dependencies" = "workflows/dependencies.md" },
+    { "Upgrade generated applications" = "workflows/upgrades.md" },
+    { "Prepare releases" = "workflows/releases.md" },
+  ] },
+  { "Full-Stack Development" = [
+    { "Web UI and server architecture" = "full-stack/ui-server.md" },
+    { "Forms and validation" = "full-stack/forms-validation.md" },
+    { "REST APIs" = "full-stack/rest-apis.md" },
+    { "PostgreSQL and Supabase" = "full-stack/postgres-supabase.md" },
+    { "Authentication and authorization" = "full-stack/auth.md" },
+    { "Database migrations" = "full-stack/migrations.md" },
+    { "Local development services" = "full-stack/local-services.md" },
+  ] },
+  { "Native iOS Development" = [
+    { "Native and cross-platform" = "ios/native-cross-platform.md" },
+    { "Expo and React Native" = "ios/expo-react-native.md" },
+    { "API integration" = "ios/api-integration.md" },
+    { "Authentication" = "ios/auth.md" },
+    { "Application distribution" = "ios/distribution.md" },
+  ] },
+  { "Operations and Troubleshooting" = [
+    { "Environment diagnostics" = "operations/diagnostics.md" },
+    { "Installation problems" = "operations/install.md" },
+    { "Dependency failures" = "operations/dependencies.md" },
+    { "Build and type-check failures" = "operations/build-errors.md" },
+    { "Git and CI troubleshooting" = "operations/git-ci.md" },
+    { "Security practices" = "operations/security.md" },
+    { "Recovery and rollback" = "operations/recovery.md" },
+  ] },
+  { "Learning Lab" = [
+    { "Guided exercises" = "lab/exercises.md" },
+    { "Practical projects" = "lab/projects.md" },
+    { "Expected results" = "lab/expected-results.md" },
+    { "Troubleshooting exercises" = "lab/troubleshooting.md" },
+    { "Knowledge checks" = "lab/knowledge-checks.md" },
+  ] },
+  { "Reference" = [
+    { "Glossary" = "reference/glossary.md" },
+    { "Command reference" = "reference/commands.md" },
+    { "Architecture decisions" = "reference/decisions/index.md" },
+    { "External resources" = "reference/resources.md" },
+    { "Release and compatibility" = "reference/releases.md" },
+    { "Source verification map" = "reference/source-map.md" },
+    { "Build and link report" = "reference/validation-report.md" },
+    { "Private hosting options" = "reference/private-hosting.md" },
+    { "Maintenance workflow" = "reference/maintenance.md" },
+    { "Documentation backlog" = "reference/backlog.md" },
+  ] },
+]
+
+[project.theme]
+language = "en"
+features = [
+  "navigation.tabs",
+  "navigation.sections",
+  "navigation.expand",
+  "navigation.path",
+  "navigation.footer",
+  "navigation.top",
+  "toc.follow",
+  "search.highlight",
+  "content.code.copy",
+]
+
+[[project.theme.palette]]
+scheme = "slate"
+primary = "blue grey"
+accent = "cyan"
+toggle.icon = "material/brightness-4"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+scheme = "default"
+primary = "blue grey"
+accent = "cyan"
+toggle.icon = "material/brightness-7"
+toggle.name = "Switch to dark mode"
+
+[project.markdown_extensions]
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+tables = {}
+toc.permalink = true
+pymdownx.details = {}
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
