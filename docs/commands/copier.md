@@ -42,7 +42,7 @@ uv run copier copy --vcs-ref v0.1.1 --data app_name=my-app \
 | `-n, --pretend` | Preview; write nothing. |
 | `--trust` | Allow unsafe features. **Never needed** for these templates; a test in each template fails if one would require it. |
 
-**Failure modes.** `Validation error for question '…'` (an answer broke a `copier.yml` validator; nothing written). Git authentication errors for the private origin. Without `--vcs-ref`, a surprise: the newest tag, even one your `devkit` does not support.
+**Failure modes.** `Validation error for question '…'` (an answer broke a `copier.yml` validator; nothing written). Git authentication errors for a private origin. Without `--vcs-ref`, a surprise: the newest tag, even one your `devkit` does not support.
 
 ## copier update
 

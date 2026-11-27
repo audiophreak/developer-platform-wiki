@@ -38,9 +38,9 @@ Published tags are **never moved or deleted**; fix forward with a new patch rele
 |---|---|
 | `gh auth login` / `gh auth status` | Sign in; `doctor` checks status. Token scopes used: `repo`, `workflow`. |
 | `gh auth setup-git` | Make `gh` Git's credential helper (private template access). |
-| `gh repo clone audiophreak/<repo>` | Clone a private repository. |
+| `gh repo clone audiophreak/<repo>` | Clone a repository (public or private). |
 | `gh repo create NAME --private --source . --remote origin --push` | Publish a new generated project. |
-| `gh repo view OWNER/NAME --json visibility` | Confirm a repository is still private. |
+| `gh repo view OWNER/NAME --json visibility` | Confirm a repository's visibility. |
 | `gh pr create --fill` / `gh pr checks` / `gh pr view --web` | Pull requests. |
 | `gh run list --commit SHA` / `gh run watch ID --exit-status` | Follow CI. |
 | `gh run download ID --dir EMPTY_DIR` | Download CI evidence artifacts (`junit.xml`, `pytest-output.txt`, `metadata.txt`, `installed-packages.txt`). |

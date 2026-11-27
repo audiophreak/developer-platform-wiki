@@ -51,7 +51,7 @@ Prevention: before a fresh run with reused project names, check `docker volume l
 
 `npm run db:status` on Supabase first prints `network exposure: loopback only` or `REACHABLE FROM OTHER MACHINES`.
 
-**Evidence.** *Repository source* (`cli.mjs`, template `CHANGELOG.md` 0.5.1 and 0.6.0, `docs/database.md`). The acceptance audit ran with `SUPABASE_ALLOW_LAN_EXPOSURE=true` on the owner's workstation.
+**Evidence.** *Repository source* (`cli.mjs`, template `CHANGELOG.md` 0.5.1 and 0.6.0, `docs/database.md`). The acceptance audit ran with `SUPABASE_ALLOW_LAN_EXPOSURE=true` on the acceptance workstation.
 
 ## Docker in general
 

@@ -8,7 +8,7 @@ a01a0a885c36c37a262ce9cdd2f6ded40459c9a28589795daf093367392a602a  2026-11-19-ori
 098e1456595dd216c4e8322a5d7f7fade5a6a99dd9d485bbfd8f344f1f50a97b  2026-11-19-original-baseline/run1-wp4-audit.tsv
 935a2fe44a134073ed065f74b9af7f6f15c3eae53ab2901dc2ff86e0ca557901  2026-11-19-original-baseline/run2-wp4-audit.tsv
 10603edb618d7896b5cfde2b129b6965fbf845b3a01977e33acf0d76e6d350b3  2026-11-19-original-baseline/run3-wp4-audit-ACCEPTED.tsv
-# originals (executed from the owner's ~/Claude directory; not archived verbatim because they contain the owner's surname)
+# originals (executed from a working directory outside the repositories; not archived verbatim because they contain the owner's surname)
 6f448b150712778b88efc6d69d36802b049a4af1874d0983a5a760007fddaeff  original:audit-wp4.py
 447c227be936c939349d426f6f634bcc67c5cc12de75afbc70a0370a67ada0cd  original:audit-native-v0.1.1.py
 73b7797123b29b2bc94b1f12c3f74b40acc8c056747c9ba201ef80f24bbe4aa2  original:audit-closeout-v0.8.1.py

@@ -2,7 +2,7 @@
 
 !!! success "Status: ACCEPTED — documentation closeout (devkit v0.8.1, web v0.7.1, native v0.1.1): 192 / 192 published acceptance gates passed, 0 failed"
 
-| Repository | Release | Commit | Tagged (UTC) | Visibility |
+| Repository | Release | Commit | Tagged (UTC) | Visibility at acceptance |
 |---|---|---|---|---|
 | `audiophreak/web-core-template` | **`v0.7.1`** | `f704572c35147597a24c2b1eb9b99dae332ea05b` | 2026-11-19 20:14 | private |
 | `audiophreak/native-ios-template` | **`v0.1.1`** | `f0f4a5a8ac58825e94a38068df1bdd413d2f1596` | 2026-11-19 18:06 | private |
@@ -76,4 +76,4 @@ The current combination passed a **192-gate** fail-closed audit: the 177 gates b
 - Local development only: no deployment configuration, no hosted database, no mail service; open public registration is not ready (see the generated `docs/auth.md`).
 - `devkit upgrade` goes to one target release per run and cannot switch features off.
 - The native e2e and the platform's live contract gate run locally, not in CI.
-- Branch protection is not configured (private repositories on the Free plan).
+- At acceptance, branch protection was not configured. The repositories now protect `main` and their release tags with rulesets (see each repository's `SECURITY.md`).

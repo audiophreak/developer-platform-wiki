@@ -6,7 +6,7 @@
 |---|:-:|:-:|---|
 | Platform unit, safety, fixture-template tests | ✓ | | self-contained |
 | Platform offline contract snapshots | ✓ | | snapshots replace cross-repo access |
-| **Platform live gate** (`pytest -m integration`, 28) | skipped | ✓ | needs the private template checkouts; CI holds no credential to read them, by design |
+| **Platform live gate** (`pytest -m integration`, 28) | skipped | ✓ | needs the template checkouts beside the platform; CI checks out only its own repository and holds no credential, by design |
 | Web template render/feature/lock/upgrade tests | ✓ (3.12, 3.14) | | full history fetched so upgrades start from real tags |
 | Web template e2e (npm in generated apps) | ✓ | | Node 26 on the runner |
 | Web template real PostgreSQL + Supabase (`-m db`) | ✓ (`database` job, Docker required) | | Ubuntu runners have Docker |
@@ -50,7 +50,7 @@ gh run list --commit <sha>
 gh run download <run-id> --dir "$(mktemp -d)"
 ```
 
-Limits (from `docs/ci-evidence.md`): the scan protects the artifact, not the live log; it recognizes common shapes only; it is evidence, not attestation; without branch protection (unavailable for private repositories on the Free plan) "green before tag" is a process rule.
+Limits (from `docs/ci-evidence.md`): the scan protects the artifact, not the live log; it recognizes common shapes only; it is evidence, not attestation; tags are created by the maintainer, so "green before tag" is a process rule (rulesets protect `main` and make release tags immutable).
 
 ## Reading a red run
 

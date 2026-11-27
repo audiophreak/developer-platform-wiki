@@ -4,7 +4,7 @@ that command does not accept.
 
 The command line below is devkit 0.8.x (`devkit COMMAND --help`; identical in 0.8.0 and 0.8.1). The same rule set is
 used by native-ios-template's `tests/test_docs_commands.py`; it is repeated here because this repository's CI cannot
-read the private template. Update it together with a devkit release that changes the command line.
+read the template. Update it together with a devkit release that changes the command line.
 
 Only code is checked (fenced blocks and inline code spans, Mermaid excluded), and only where `devkit` stands in
 command position: at the start of a span or line, after `uv run [--project DIR]`, `$ `, `gh_git ` or a shell operator.

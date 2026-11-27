@@ -10,7 +10,7 @@
 | `audiophreak/developer-platform-wiki` | This manual | clone to read or edit it |
 | your applications | Generated repositories; each is independent after generation | create with `devkit new` |
 
-All five are private. `devkit new` reads the templates **from GitHub at a release tag**, so you do not need the template checkouts to generate projects. You need them to develop the templates or to run the platform's live release gate.
+If a repository is private you need read access to it (see below). `devkit new` reads the templates **from GitHub at a release tag**, so you do not need the template checkouts to generate projects. You need them to develop the templates or to run the platform's live release gate.
 
 ## Conventional layout
 
@@ -72,7 +72,7 @@ Exit code `0` means no required check failed; warnings never fail it. The `mise`
 
 ## Private repository access
 
-Anything that reads a template needs Git credentials that work **without a prompt**: `devkit new`, `devkit upgrade`, `devkit status` (it lists remote tags), `devkit native add`, and raw `copier copy`/`copier update`. Choose one:
+A public template needs no credentials. If a template repository is private, anything that reads it needs Git credentials that work **without a prompt**: `devkit new`, `devkit upgrade`, `devkit status` (it lists remote tags), `devkit native add`, and raw `copier copy`/`copier update`. Choose one:
 
 === "gh as credential helper (recommended)"
 

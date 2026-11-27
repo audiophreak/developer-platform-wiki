@@ -52,9 +52,9 @@ uv run python tools/capture_contract.py --template ../web-core-template --ref v0
 | Layer | Proves | Runs | Needs |
 |---|---|---|---|
 | **Offline snapshots** (`tests/test_contract_snapshots.py`) | For every supported release the registry agrees with its questions (types, defaults, choices, strictness, absence before `since`) and Node major; a snapshot exists for the oldest release and each release that introduced an option | CI and locally, always | nothing |
-| **Live release gate** (`pytest -m integration`) | Each snapshot still equals the real template at its tag; old and new releases really generate with the right options; the native and web layers really share one API contract | before tagging, where the templates are checked out | the private checkouts |
+| **Live release gate** (`pytest -m integration`) | Each snapshot still equals the real template at its tag; old and new releases really generate with the right options; the native and web layers really share one API contract | before tagging, where the templates are checked out | the template checkouts |
 
-**Why not check out the templates in platform CI?** It would need a stored credential able to read the private template repositories, usable by anyone who can change the workflow. Snapshots make it unnecessary; the live gate is run locally instead. Revisit if the repositories become public.
+**Why not check out the templates in platform CI?** While the template repositories are private it would need a stored credential able to read them, usable by anyone who can change the workflow. Snapshots make it unnecessary; the live gate is run locally instead. Once the repositories are public, a CI checkout needs no credential and can be revisited.
 
 ## The native contract
 

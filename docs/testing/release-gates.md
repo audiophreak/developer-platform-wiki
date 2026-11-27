@@ -18,11 +18,11 @@ A **release gate** is a check that must pass before a tag is created but cannot 
 | | live contract gate | `uv run pytest -m integration` (checkouts beside it) |
 | | full suite, CI green | `uv run --locked pytest` |
 
-Tag mechanics, from `docs/maintaining.md` (both templates) and `docs/publishing.md`: merge the PR with a **merge commit**, fast-forward local `main`, wait for CI on the merge commit, create an **annotated** tag on it, push the tag, verify `git ls-remote --tags origin` resolves to the merge commit, verify the repository is still private. Never move or delete a published tag.
+Tag mechanics, from `docs/maintaining.md` (both templates) and `docs/publishing.md`: merge the PR with a **merge commit**, fast-forward local `main`, wait for CI on the merge commit, create an **annotated** tag on it, push the tag, verify `git ls-remote --tags origin` resolves to the merge commit, verify the repository visibility is as intended. Never move or delete a published tag.
 
 ## Published-pair acceptance
 
-The final acceptance is a **fail-closed audit** (`~/Claude/audit-wp4.py` on the owner's workstation): every gate is one argument-list subprocess with no shell; its exit code is asserted and its output checked (test counts, no failures, no skips); a gate depending on a failed one is recorded as BLOCKED, which is also a failure; the process exits 0 only if every gate passed; the evidence file lists every gate.
+The final acceptance is a **fail-closed audit** (`audit-wp4.py`, a harness kept outside the repositories on the acceptance workstation): every gate is one argument-list subprocess with no shell; its exit code is asserted and its output checked (test counts, no failures, no skips); a gate depending on a failed one is recorded as BLOCKED, which is also a failure; the process exits 0 only if every gate passed; the evidence file lists every gate.
 
 !!! success "Accepted: 151 / 151 published acceptance gates passed, 0 failed"
 
@@ -31,7 +31,7 @@ The final acceptance is a **fail-closed audit** (`~/Claude/audit-wp4.py` on the 
 | Group | Gates | Checks |
 |---|---:|---|
 | Preflight | 2 | Docker reachable with no containers; **no leftover Docker volumes** (stale volumes keep old passwords) |
-| Published repositories | 12 | for each of the three: remote annotated tag → expected commit; remote `main` == expected SHA; repository is **PRIVATE**; `main` CI green on that SHA |
+| Published repositories | 12 | for each of the three: remote annotated tag → expected commit; remote `main` == expected SHA; repository is **PRIVATE** (the intended visibility at acceptance); `main` CI green on that SHA |
 | Platform from a fresh clone | 5 | clone tag `v0.8.0`; HEAD == `e185d6d…`; `uv sync --locked`; `devkit --version` = 0.8.0; `devkit doctor` |
 | Generation from GitHub | 17 | `devkit new` for `basic-app` (web-core), `fs-pg`, `fs-sb` (full-stack × provider), `nat-pg`, `nat-sb` (native-ios × provider); web provenance = published v0.7.0 (not a path); native provenance = published v0.1.0; baseline committed |
 | Refusals | 8 | full-stack without a database; full-stack with `auth=false`; native-ios without a database; `--native-set` on web-core: each **exit 2 and created nothing** |
@@ -57,7 +57,7 @@ Neither earlier run indicated a defect in the released code; both were environme
 
 ## Acceptance of the native v0.1.1 patch: 177 / 177
 
-After `native-ios-template v0.1.1` was tagged, the same fail-closed harness was rerun against the published combination (devkit v0.8.0, web v0.7.0, native v0.1.1) as `~/Claude/audit-native-v0.1.1.py`, derived from the accepted audit with native expectations moved to v0.1.1 and **26 additional gates**:
+After `native-ios-template v0.1.1` was tagged, the same fail-closed harness was rerun against the published combination (devkit v0.8.0, web v0.7.0, native v0.1.1) as `audit-native-v0.1.1.py`, derived from the accepted audit with native expectations moved to v0.1.1 and **26 additional gates**:
 
 | Group | Gates | Checks |
 |---|---:|---|
@@ -66,7 +66,7 @@ After `native-ios-template v0.1.1` was tagged, the same fail-closed harness was 
 | Existing v0.1.0 project upgraded | 16 | generate with `--native-template-ref v0.1.0`; `devkit status` reports `native v0.1.0 newer available: v0.1.1`; the v0.1.0 Release check reproduces `?? ios/.derived-data-release.log` and **devkit upgrade refuses** (exit 1); after moving that one file, the dry run plans `v0.1.0 -> v0.1.1`; the upgrade succeeds and changes exactly `.copier-answers.ios.yml`, `ios/README.md`, `ios/scripts/check-release-config.sh`; both layers up to date; the v0.1.1 Release check leaves the tree clean; a later dry run is not refused |
 | **Total** | **177** | **177 passed, 0 failed** |
 
-Evidence: `~/Claude/audit-evidence/native-v0.1.1-audit.tsv` (`TOTAL gates 177 passed 177 failed 0`). The real end-to-end scenario passed again for both providers (sign-in, Keychain token, session, CRUD, cross-user denial, server and database restart, relaunch, sign-out, old token 401).
+Evidence: `native-v0.1.1-audit.tsv`, archived as `docs/evidence/2026-11-19-native-v0.1.1/native-v0.1.1-audit-ACCEPTED.tsv` (`TOTAL gates 177 passed 177 failed 0`). The real end-to-end scenario passed again for both providers (sign-in, Keychain token, session, CRUD, cross-user denial, server and database restart, relaunch, sign-out, old token 401).
 
 ## Acceptance of the documentation closeout
 
@@ -82,4 +82,4 @@ Project names carry a `co-` prefix so the run can never reuse a database volume 
 
 ## Running an acceptance yourself
 
-The audit script lives outside the repositories, in the owner's `~/Claude` directory, and is not part of any release. Its structure is reproducible from the table above: work in a fresh `tools/scratch.py new` workspace, clone the platform at its tag, generate every profile × provider from GitHub, and assert each gate with exit codes and parsed counts. Before starting: no running containers and no leftover volumes for these projects. A completed run leaves its projects' named volumes behind (`db:down` keeps data by design), so the next run's preflight requires removing them first, deliberately.
+The audit script lives outside the repositories and is not part of any release; sanitized copies are archived in `docs/evidence/`. Its structure is reproducible from the table above: work in a fresh `tools/scratch.py new` workspace, clone the platform at its tag, generate every profile × provider from GitHub, and assert each gate with exit codes and parsed counts. Before starting: no running containers and no leftover volumes for these projects. A completed run leaves its projects' named volumes behind (`db:down` keeps data by design), so the next run's preflight requires removing them first, deliberately.

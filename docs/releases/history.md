@@ -24,7 +24,7 @@ timeline
 
 | # | Release(s) | Capability | Architectural change |
 |---|---|---|---|
-| 0 | devkit 0.1.0 (untagged in the split repo) | `doctor`, `new`, `--dry-run`; the Web Core template inside the platform | first cut, derived from the reference app `my-first-app` (shadcn/ui baseline `f244594`) |
+| 0 | devkit 0.1.0 (untagged in the split repo) | `doctor`, `new`, `--dry-run`; the Web Core template inside the platform | first cut, derived from a reference application (shadcn/ui baseline `f244594`) |
 | 1 | devkit **v0.2.0** (`11caaef`), template **v0.1.0** (`057d608`) | the template moves to its own repository with its own versions; published mode builds from a release tag and records the URL; `--template PATH` for development | **two repositories, one-way contract** (`profiles.py`); answer validation moves into `copier.yml`; CI on Linux for Python 3.12 and 3.14; private-repository access through credential helpers |
 | 2 | devkit **v0.3.0** (`c4a9917`), template **v0.2.0** (`f78f009`) | optional `zod`; `devkit upgrade` (clean tree, range, kept selections, conflicts → exit 3) | feature composition: one question per feature, `features.yml`, the **lockfile matrix**, **strict booleans** (after `zod=banana` was silently accepted), `Option.since`, **offline contract snapshots** + live release gate; destructive-command rules and `scratch.py` (after the `rm -rf /dev/null` incident) |
 | 3 | devkit **v0.4.0** (`ad77355`), template **v0.3.0** (`b4a901d`) | `forms` (requires zod) | first real `requires` rule, enforced by a template validator; CI evidence artifacts; `.prettierignore` fix for numeric `_commit` |
@@ -45,7 +45,7 @@ timeline
 | Rules only in the template; devkit declares options | mirroring rules in devkit | `docs/feature-composition.md` |
 | Committed lockfile per dependency set | `npm install` at generation; merging lock fragments; one lock with everything; npm workspaces | same |
 | Strict booleans (`yaml` + choices + validator) | `type: bool`; string choices | same |
-| Offline snapshots + local live gate | CI token to read the private template | `docs/release-strategy.md` |
+| Offline snapshots + local live gate | CI token to read the (then private) template | `docs/release-strategy.md` |
 | Better Auth on PostgreSQL for both providers | Supabase Auth for the Supabase provider | `docs/architecture.md` |
 | Native iOS as an add-on template | a feature flag in the web template | `docs/feature-composition.md`, `docs/native-ios.md` |
 | mise not adopted | mise for Node and Python | `docs/architecture.md` |
