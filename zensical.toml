@@ -3,7 +3,7 @@ site_name = "Developer Platform Manual"
 site_description = "Owner, operator and developer manual for the accepted Developer Platform baseline"
 docs_dir = "docs"
 site_dir = "site"
-copyright = "Private documentation. Baseline: developer-platform v0.8.1, web-core-template v0.7.1, native-ios-template v0.1.1."
+copyright = "MIT License. Baseline: developer-platform v0.8.1, web-core-template v0.7.1, native-ios-template v0.1.1."
 
 nav = [
   { "Home" = [

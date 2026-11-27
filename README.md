@@ -1,6 +1,6 @@
 # Developer Platform Manual
 
-The private owner, operator and developer manual for the accepted Developer Platform baseline:
+The owner, operator and developer manual for the accepted Developer Platform baseline:
 
 | Repository | Release | Commit |
 |---|---|---|
@@ -14,7 +14,7 @@ Markdown source in `docs/`, built with [Zensical](https://zensical.org/) into a 
 
 ## Browse it (macOS)
 
-Prerequisites: Git, the GitHub CLI with access to this private repository, [uv](https://docs.astral.sh/uv/), Python 3.11+ (Homebrew `python@3.14` works), and a browser.
+Prerequisites: Git, the GitHub CLI (`gh`), [uv](https://docs.astral.sh/uv/), Python 3.11+ (Homebrew `python@3.14` works), and a browser.
 
 ```bash
 gh repo clone audiophreak/developer-platform-wiki ~/Developer/developer-platform-wiki
@@ -54,6 +54,8 @@ scripts/              check_links.py, check_content.py, check_baseline.py, check
 
 The first commit of this repository preserves the original bootstrap wiki (verified against devkit v0.2.0); the manual was rewritten from the released sources in the next commit. Maintenance rules: `docs/reference/maintenance.md`.
 
-## Privacy
+## Privacy, security and licence
 
-Keep this repository private. It contains no credentials or personal data (enforced by `scripts/check_content.py`), but it documents private repositories.
+The manual contains no credentials or personal data; `scripts/check_content.py` enforces this in CI. Examples use placeholders (`my-app`, `OWNER`, `example.com`) and paths relative to a directory such as `~/Developer`. Report security issues privately as described in [SECURITY.md](SECURITY.md).
+
+Licensed under the [MIT License](LICENSE).

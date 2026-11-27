@@ -20,7 +20,7 @@ Checks: platform; Python ≥ 3.12; Copier (project-local); Git ≥ 2.27 and iden
 
 **Where it fits.** First thing on a new machine; again after upgrading Xcode, Node or Homebrew.
 
-**Failure modes.** Exit 1 if any *required* check fails (Python, Copier, Git, Node, npm, uv). A `node … generated projects pin 26.x` failure means the wrong Node is first on `PATH`: `fnm use 26`. A `git credentials` warning means private-template access will fail.
+**Failure modes.** Exit 1 if any *required* check fails (Python, Copier, Git, Node, npm, uv). A `node … generated projects pin 26.x` failure means the wrong Node is first on `PATH`: `fnm use 26`. A `git credentials` warning means access to a private template will fail.
 
 ---
 

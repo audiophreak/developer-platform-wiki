@@ -1,7 +1,7 @@
 [project]
 name = "developer-platform-wiki"
 version = "0.1.0"
-description = "Private, local-first technical knowledge base for the AI-assisted Developer Platform"
+description = "Local-first technical knowledge base for the AI-assisted Developer Platform"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []

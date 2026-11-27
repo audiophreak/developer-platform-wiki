@@ -36,7 +36,7 @@ flowchart LR
     wt[web-core-template]
     nt[native-ios-template]
     app[a generated app]
-    ref[my-first-app<br/>reference, read-only]
+    ref[reference application<br/>read-only]
   end
   a -->|edit only those named<br/>in the work package| dp & wt & nt
   a -->|read-only inspection| ref
@@ -51,7 +51,7 @@ flowchart LR
 | Web ↔ native layer | neither writes the other's files; web tooling ignores `ios/`; agents read `ios/AGENTS.md` before touching it | template tests in both directions |
 | Repository ↔ workstation | no global installs, no configuration changes; `doctor` read-only | `AGENTS.md`; doctor runs only queries |
 | Repository ↔ credentials | `devkit` never prompts for, reads, stores or echoes credentials; Git runs with prompting off; URL credentials redacted; CI holds no secrets | code, CI tests, report scan |
-| Agent ↔ authorized repositories | a work package names what may change; everything else is read-only (for example the reference app `my-first-app`) | the acceptance audit's "local repo HEAD, status, tags and branches unchanged" gates |
+| Agent ↔ authorized repositories | a work package names what may change; everything else is read-only (for example the reference application) | the acceptance audit's "local repo HEAD, status, tags and branches unchanged" gates |
 | Template answers ↔ generated code | every answer is untrusted: validated in `copier.yml`, rendered only through safe filters (`to_json`, restricted character sets) | template tests with awkward answers |
 
 ## Destructive commands

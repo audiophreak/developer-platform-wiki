@@ -14,22 +14,22 @@
 
 | | |
 |---|---|
-| **Problem** | Private hosting, credentials for private template access, pull requests, CI results and evidence. |
+| **Problem** | Repository hosting, credentials for private template access, pull requests, CI results and evidence. |
 | **Why selected** | `gh` stores the token in the keyring and can act as Git's credential helper (`gh auth setup-git`), so nothing secret enters a repository or a command line. |
 | **Invoked by** | You (`gh repo create/clone`, `gh pr`, `gh run`), `doctor` (`gh auth status`), the acceptance audit (visibility, CI status). |
 | **Phase** | Workstation, delivery, release. |
-| **Caveats** | All repositories are private: anyone generating projects needs read access. On GitHub's Free plan, branch protection for private repositories is unavailable, so "CI must be green before tagging" is a process rule, not an enforced one. |
+| **Caveats** | While a template repository is private, anyone generating projects needs read access to it. Rulesets protect `main` and the release tags; "CI must be green before tagging" remains a process rule, because tags are created by the maintainer. |
 
 ## GitHub Actions
 
 | | |
 |---|---|
-| **Problem** | Running every gate that does not need local services or private cross-repository access on every push and PR. |
+| **Problem** | Running every gate that does not need local services or cross-repository checkouts on every push and PR. |
 | **Why selected** | Built into GitHub; macOS runners exist for Xcode. |
 | **Invoked by** | Push to `main`, pull requests. |
 | **Produces** | Job results; downloadable evidence (`junit.xml`, console log, `metadata.txt` with the commit under test, installed packages) for 30 days in the platform and web template. |
 | **Phase** | CI. |
-| **Caveats** | No secrets are stored, so CI cannot read the other private repositories: cross-repository live checks are local release gates. GitHub's macOS runners do not reliably provide Docker, so the native e2e is local. See [GitHub CI versus local](../testing/ci.md). |
+| **Caveats** | No secrets are stored and each workflow checks out only its own repository, so cross-repository live checks are local release gates. GitHub's macOS runners do not reliably provide Docker, so the native e2e is local. See [GitHub CI versus local](../testing/ci.md). |
 
 ## Claude Code
 

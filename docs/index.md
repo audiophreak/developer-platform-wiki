@@ -26,7 +26,7 @@ flowchart LR
   swift -->|Authorization: Bearer| next
 ```
 
-Three private repositories with independent version lines produce one application repository. `devkit` decides **which** template releases may be used; the templates decide **what** an application contains; the application owns everything after generation.
+Three repositories with independent version lines produce one application repository. `devkit` decides **which** template releases may be used; the templates decide **what** an application contains; the application owns everything after generation.
 
 ## Where to start
 

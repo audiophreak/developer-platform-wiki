@@ -15,7 +15,7 @@ Agent sessions end; the work must not depend on what a session remembers. Contin
 A new session starts by reading `AGENTS.md` (automatic through `CLAUDE.md`), then `NEXT_SESSION.md`, then verifying the state it describes (`git status`, `git log`, `gh pr checks`, tags) rather than trusting it.
 
 !!! note "Handoff files may contain local paths"
-    `NEXT_SESSION.md` says so itself: it is a handoff for the owner and contains local paths on purpose; generalize them before any repository is made public. It contains no credentials.
+    `NEXT_SESSION.md` is the maintainer's handoff; it uses repository-relative paths and contains no credentials or personal data.
 
 ## Prompt design (work packages)
 
@@ -70,7 +70,7 @@ A finding goes back to implementation; nothing is "accepted with a note".
 
 ## Avoiding changes outside authorized repositories
 
-- Name the authorized repositories in the prompt; name the read-only ones too (the reference app `my-first-app` has always been read-only).
+- Name the authorized repositories in the prompt; name the read-only ones too (the reference application has always been read-only).
 - Generate and experiment in **fresh scratch workspaces** (`tools/scratch.py new`, `mktemp -d`), never inside a source checkout (`devkit new` refuses destinations inside the checkouts anyway).
 - End every work package by proving the untouched repositories are untouched: `git -C REPO status --porcelain`, `git rev-parse HEAD`, tags and branches unchanged (three gates of the acceptance audit do exactly this).
 - Run `devkit` from the platform checkout with `uv run --project …` rather than installing it anywhere.

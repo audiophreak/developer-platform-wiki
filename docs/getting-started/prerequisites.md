@@ -9,7 +9,7 @@ Everything below is checked, read-only, by `devkit doctor` ([setup](setup.md)). 
 | macOS on Apple silicon | everything native; recommended overall | macOS 27 on arm64 in the acceptance workstation | `platform` |
 | Homebrew | installing the `Brewfile` | any current | `brew`, `brewfile` (warn) |
 | Git | everything | ≥ 2.27 (Copier's floor) | `git` (fail), `git identity` (warn) |
-| GitHub CLI `gh` | private template access, repositories | current | `gh`, `gh auth` (warn) |
+| GitHub CLI `gh` | repositories, private template access | current | `gh`, `gh auth` (warn) |
 | uv | Python environments | CI pins 0.13.6 | `uv` (fail) |
 | Python | `devkit`, Copier, template tests | ≥ 3.12 (CI tests 3.12 and 3.14) | `python` (fail) |
 | fnm (or nvm/mise) | selecting Node per project | current | `fnm` (warn) |
@@ -100,10 +100,10 @@ Install a Simulator runtime from **Xcode › Settings › Components** if none i
 git config --global user.name  "Your Name"
 git config --global user.email "you@users.noreply.github.com"
 gh auth login                      # scopes used by the platform: repo, workflow
-gh auth setup-git                  # lets git (and so Copier) read the private templates without prompting
+gh auth setup-git                  # lets git (and so Copier) read a private template without prompting
 ```
 
-The templates are **private** repositories. `devkit` runs Git with prompting disabled (`GIT_TERMINAL_PROMPT=0`) and never touches credentials, so Git must already be able to authenticate non-interactively. `gh auth setup-git` is the recommended way; [setup](setup.md#private-repository-access) lists the alternatives.
+If a template repository is **private**, Git needs credentials. `devkit` runs Git with prompting disabled (`GIT_TERMINAL_PROMPT=0`) and never touches credentials, so Git must already be able to authenticate non-interactively. `gh auth setup-git` is the recommended way; [setup](setup.md#private-repository-access) lists the alternatives.
 
 ## 8. Claude Code
 

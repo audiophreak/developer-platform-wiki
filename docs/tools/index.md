@@ -54,7 +54,7 @@ flowchart TB
 | If this breaks… | …these stop working |
 |---|---|
 | uv / Python | `devkit`, Copier, all template and platform tests, this wiki's build |
-| Git credentials | `devkit new`, `upgrade`, `status`, `native add`, raw Copier against the private templates |
+| Git credentials | `devkit new`, `upgrade`, `status`, `native add`, raw Copier against a private template repository |
 | Node 26 on `PATH` | `npm ci`, `npm run check`, `e2e.mjs`, the template's `e2e` tests |
 | Docker daemon | `db:up`, `test:db`, the template's `db` tests, `e2e.mjs` |
 | Xcode / simulator runtime | `ios/scripts/test.sh`, `check-release-config.sh`, the native template's `xcode` tests, `e2e.mjs` |

@@ -1,6 +1,6 @@
 # Acceptance evidence
 
-The manual's acceptance claims (151 / 151, 177 / 177, 192 / 192) rest on the evidence files archived here, in `docs/evidence/` of this private repository. They were produced on the owner's workstation by a **fail-closed acceptance harness** and copied here so the claims can be checked without that workstation.
+The manual's acceptance claims (151 / 151, 177 / 177, 192 / 192) rest on the evidence files archived here, in `docs/evidence/` of this repository. They were produced on the acceptance workstation by a **fail-closed acceptance harness** and copied here so the claims can be checked without that workstation.
 
 ## Runs
 
@@ -45,9 +45,10 @@ The run date is the evidence files' write time on 2026-11-19. Toolchain facts qu
 
 ## Provenance and integrity
 
-- The harnesses ran from the owner's `~/Claude` directory against fresh `tools/scratch.py` workspaces and wrote their TSVs to `~/Claude/audit-evidence/`. The TSVs are archived **verbatim**.
+- The harnesses ran from a working directory outside the repositories against fresh `tools/scratch.py` workspaces and wrote their TSVs there. The TSVs are archived **verbatim**.
 - The harnesses are archived as **sanitized copies**: the only change is that one literal in the personal-data scan pattern (the owner's surname) is replaced with `OWNER-SURNAME-REDACTED`. The SHA-256 of each executed original is recorded, so a copy kept elsewhere can be matched.
 - No evidence file contains credentials, passwords, tokens or personal paths. The harness prints none, and `scripts/check_content.py` scans this directory in CI.
+- **Visibility note (2026-11-27).** The `repository is PRIVATE` gates record the visibility intended and observed at acceptance on 2026-11-19. Visibility is a repository setting, not part of a release: the repositories are being prepared for public distribution, and the archived TSVs are left unchanged because they are hash-pinned evidence of that run.
 - Checksums: [`SHA256SUMS`](../evidence/SHA256SUMS). Verify with:
 
 ```bash
